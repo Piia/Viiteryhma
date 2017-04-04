@@ -21,8 +21,11 @@ public class References {
     public void run() throws IOException{
         File file = new File("test.bib");
         FileWriter filewriter = new FileWriter(file);
-        OneReference o = new OneReference(filewriter);
-        o.run();
-        filewriter.close();
+        WriteReference o = new WriteReference(filewriter);
+        GetReference r = new GetReference();
+        o.greatnewreference(r.referense1());
+        o.greatnewreference(r.referense2());
+        o.save();
+        
     }
 }
