@@ -22,9 +22,15 @@ public class References {
         File file = new File("test.bib");
         FileWriter filewriter = new FileWriter(file);
         WriteReference o = new WriteReference(filewriter);
-        GetReference r = new GetReference();
+        ReferenceToRightFormat r = new ReferenceToRightFormat();
         o.greatnewreference(r.referense1());
         o.greatnewreference(r.referense2());
+        r.Entry("inproceedings", "VPL11");
+        r.oneKeyField("author", "Vihavainen, Arto and Paksula, Matti and Luukkainen, Matti");
+        r.oneKeyField("title", "Extreme Apprenticeship Method in Teaching Programming for Beginners.");
+        r.oneKeyField("year", "2011");
+        r.oneKeyField("booktitle", "SIGCSE '11: Proceedings of the 42nd SIGCSE technical symposium on Computer science education");
+        o.greatnewreference(r.referense());
         o.save();
         
     }

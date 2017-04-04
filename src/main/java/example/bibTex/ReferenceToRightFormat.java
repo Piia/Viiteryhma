@@ -6,16 +6,57 @@
 package example.bibTex;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
  * @author tiera
  */
-public class GetReference {
+public class ReferenceToRightFormat {
 
-    public GetReference() {
+    private ArrayList<String> toWrite;
+    
+    public ReferenceToRightFormat() {
+     /*   k = new ArrayList<>();
+        
+        k.add("type");
+        k.add("name");
+
+        k.add("address");
+        k.add("annote");
+        k.add("author");
+
+        k.add("booktitle");
+        k.add("chapter");
+        k.add("crossref");
+
+        k.add("edition");
+        k.add("editor");
+        k.add("howpublished");
+
+        k.add("institution");
+        k.add("journal");
+        k.add("key");
+
+        k.add("month");
+        k.add("note");
+        k.add("number");
+
+        k.add("organization");
+        k.add("pages");
+        k.add("publisher");
+
+        k.add("school");
+        k.add("series");
+        k.add("title");
+
+        k.add("type");
+        k.add("volume");
+        k.add("volume");
+*/
     }
-    public ArrayList<String> referense1(){
+
+    public ArrayList<String> referense1() {
         ArrayList<String> r1 = new ArrayList<>();
         r1.add("@article{W04,");
         r1.add("author = {Whittington, Keith J.},");
@@ -29,8 +70,8 @@ public class GetReference {
         r1.add("address = {USA},");
         return r1;
     }
-    
-    public ArrayList<String> referense2(){
+
+    public ArrayList<String> referense2() {
         ArrayList<String> r2 = new ArrayList<>();
         r2.add("@article{BB03,");
         r2.add("author = {Bruhn, Russel E. and Burton, Philip J.},");
@@ -43,4 +84,20 @@ public class GetReference {
         r2.add("publisher = {ACM},");
         return r2;
     }
+    
+    
+    public void Entry(String key, String name){
+        toWrite = new ArrayList<>();
+        toWrite.add("@" + key + "{" + name + ",");
+        
+    }
+
+    public void oneKeyField(String key, String contents) {
+        toWrite.add(key + " = {"+ contents+ "},");
+    }
+    
+    public ArrayList<String> referense(){
+        return toWrite;
+    }
+
 }
