@@ -23,8 +23,6 @@ public class References {
         FileWriter filewriter = new FileWriter(file);
         WriteReference o = new WriteReference(filewriter);
         ReferenceToRightFormat r = new ReferenceToRightFormat();
-        o.greatnewreference(r.referense1());
-        o.greatnewreference(r.referense2());
         r.Entry("inproceedings", "VPL11");
         r.oneKeyField("author", "Vihavainen, Arto and Paksula, Matti and Luukkainen, Matti");
         r.oneKeyField("title", "Extreme Apprenticeship Method in Teaching Programming for Beginners.");
