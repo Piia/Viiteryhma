@@ -53,10 +53,10 @@ public class WriteReferenceTest {
         o.greatnewreference(k);
         o.save();
         Scanner lukija = new Scanner(file);
-        for (String string : k) {
+        k.stream().forEach((string) -> {
             String t = lukija.nextLine();
             assertEquals(string, t);
-        }
+        });
         
         
     }

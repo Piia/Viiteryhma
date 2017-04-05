@@ -13,23 +13,37 @@ import java.io.IOException;
  *
  * @author tiera
  */
-public class References {
+public class References implements referencesToBibTex {
 
-    public References() {
+    private File file;
+    private FileWriter filewriter;
+    private WriteReference o;
+    private ReferenceToRightFormat r;
+
+    public References(File file) throws IOException {
+        this.file = file;
+        this.filewriter = new FileWriter(file);
+        this.o = new WriteReference(filewriter);
+        this.r = new ReferenceToRightFormat();
     }
     
-    public void run() throws IOException{
-        File file = new File("test.bib");
-        FileWriter filewriter = new FileWriter(file);
-        WriteReference o = new WriteReference(filewriter);
-        ReferenceToRightFormat r = new ReferenceToRightFormat();
-        r.Entry("inproceedings", "VPL11");
-        r.oneKeyField("author", "Vihavainen, Arto and Paksula, Matti and Luukkainen, Matti");
-        r.oneKeyField("title", "Extreme Apprenticeship Method in Teaching Programming for Beginners.");
-        r.oneKeyField("year", "2011");
-        r.oneKeyField("booktitle", "SIGCSE '11: Proceedings of the 42nd SIGCSE technical symposium on Computer science education");
+    @Override
+    public void HederAndItsType(String heder, String type){
+        r.Entry(type, heder);
+    }
+    
+    @Override
+    public void OneFieldAndItsType(String field, String type){
+        r.oneKeyField(type, field);
+    }
+    
+    @Override
+    public void EndReference() throws IOException{
         o.greatnewreference(r.referense());
+    }
+    
+    @Override
+    public void EndFile() throws IOException{
         o.save();
-        
     }
 }
