@@ -11,8 +11,8 @@ import java.io.IOException;
  *
  * @author tiera
  */
-public interface referencesToBibTex {
-
+public interface referencesToBibTex { 
+    
     void EndFile() throws IOException;
 
     void EndReference() throws IOException;
