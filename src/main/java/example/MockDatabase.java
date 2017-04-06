@@ -23,4 +23,8 @@ public class MockDatabase {
     public static List<Article> getAll() {
         return references;
     }
+    
+    public static void reset() {
+        references.clear();
+    }
 }
