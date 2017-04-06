@@ -14,9 +14,9 @@ public class Article {
     private String title;
     private String journal;
     //int? String? Year?
-    private int year;
+    private String year;
     //int? String?
-    private int volume;
+    private String volume;
     
     //optional:
     //int?
@@ -31,7 +31,7 @@ public class Article {
     private String key;
     
     //or Article(String title, String journal, int year, String volume, String... author) ?
-    public Article(List<String> author, String title, String journal, int year, int volume) {
+    public Article(List<String> author, String title, String journal, String year, String volume) {
         this.author = author;
         this.title = title;
         this.journal = journal;
@@ -77,11 +77,11 @@ public class Article {
         return journal;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public int getVolume() {
+    public String getVolume() {
         return volume;
     }
 

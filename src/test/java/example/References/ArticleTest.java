@@ -32,7 +32,7 @@ public class ArticleTest {
     public void setUp() {
         article = new Article(Arrays.asList("Anthony Robins", "Janet Rountree", "Nathan Rountree"),
                 "Learning and teaching programming: A review and discussion",
-                "Computer Science Education", 2003, 13);
+                "Computer Science Education", "2003", "13");
     }
 
     @After
@@ -49,8 +49,8 @@ public class ArticleTest {
         
         assertEquals("Learning and teaching programming: A review and discussion", article.getTitle());
         assertEquals("Computer Science Education", article.getJournal());
-        assertEquals(2003, article.getYear());
-        assertEquals(13, article.getVolume());
+        assertEquals("2003", article.getYear());
+        assertEquals("13", article.getVolume());
     }
 
     @Test
