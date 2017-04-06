@@ -5,6 +5,7 @@
  */
 package example.References;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Article {
@@ -43,6 +44,50 @@ public class Article {
         this.month = "";
         this.note = "";
         this.key = "";
+    }
+    
+    public Article() {
+        this.author = new ArrayList<>();
+        this.title = "";
+        this.journal = "";
+        this.year = "";
+        this.volume = "";
+        
+        this.number = "";
+        this.pages = "";
+        this.month = "";
+        this.note = "";
+        this.key = "";
+    }
+    
+    public void setAuthor(List<String> author) {
+        this.author = author;
+    }
+    
+    public void setAuthor(String author) {
+        // (String)"author1, author2" => (String[])[author1, author2]
+        this.author = new ArrayList<>();
+        String[] authors = author.split(",");
+        
+        for (String a : authors) {
+            this.author.add(a.trim());
+        }
+    }
+    
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    
+    public void setJournal(String journal) {
+        this.journal = journal;
+    }
+    
+    public void setYear(String year) {
+        this.year = year;
+    }
+    
+    public void setVolume(String volume) {
+        this.volume = volume;
     }
     
     public void setNumber(String number) {

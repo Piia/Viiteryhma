@@ -1,5 +1,6 @@
 package example;
 
+import example.References.Article;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,23 +12,37 @@ public class AppController {
 
     @GetMapping("/")
     public String app(Model model) {
-        // TODO: Add new Article()
-        model.addAttribute("article", null);
-        
-        return "app";
+        // Default page
+        return "redirect:/new";
     }
     
-    @PostMapping("/references/article")
-    public String addArticleReference(@ModelAttribute Object article) {
-        // TODO: Object -> Article
+    @GetMapping("/new")
+    public String getNewReference(Model model) {
+        model.addAttribute("article", new Article());
+        return "new";
+    }
+    
+    @PostMapping("/new")
+    public String postNewReference(Model model, @ModelAttribute Article article) {
+        MockDatabase.add(article);
         
-        return "app";
+        model.addAttribute("success", true);
+        
+        // Reset
+        model.addAttribute("article", new Article());
+        return "new";
     }
     
     @GetMapping("/export")
-    public String exportToBibtex(Model model) {
+    public String getExportReferences(Model model) {
+        return "export";
+    }
+    
+    @PostMapping("/export")
+    public String postExportReferences(Model model) {
+        // TODO: Create using BibTex
         model.addAttribute("filePath", "/linkki.html");
-        
+        model.addAttribute("success", true);
         return "export";
     }
 }
