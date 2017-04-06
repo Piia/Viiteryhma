@@ -13,6 +13,18 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
 
+apply plugin: "jacoco" 
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile 'com.google.guava:guava:20.0'  
+    testCompile 'junit:junit:4.12'
+}
+
+
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = 1.8
 
