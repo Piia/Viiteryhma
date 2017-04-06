@@ -7,9 +7,11 @@ package example.References;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Article {
-
+    private final String type = "article";
     //required:
     //List luultavasti järkevämpi kuin pelkkä String, erityisesti kun myöhemmin listataan viitteet
 
@@ -132,6 +134,10 @@ public class Article {
     public void setKey(String key) {
         this.key = key;
     }
+    
+    public String getType() {
+        return type;
+    }
 
     public List<String> getAuthor() {
         return author;
@@ -178,8 +184,10 @@ public class Article {
     public String toString() {
         StringBuilder builder = new StringBuilder();
 
-        builder.append("Authors: " + this.author.get(0));
+        
         int numberOfAuthors = this.author.size();
+        
+        builder.append("Authors: " + (numberOfAuthors > 0 ? this.author.get(0) : ""));
         for (int i = 1; i < numberOfAuthors; i++) {
             if (i == numberOfAuthors - 1) {
                 builder.append(" and " + this.author.get(i));
@@ -217,5 +225,20 @@ public class Article {
 
         builder.append("\n");
         return builder.toString();
+    }
+    
+    public Map<String, String> getFields() {
+        Map<String, String> map = new HashMap<>();
+        map.put("author", String.join(", ", author));
+        map.put("title", title);
+        map.put("journal", journal);
+        map.put("year", year);
+        map.put("volume", volume);
+        map.put("number", number);
+        map.put("pages", pages);
+        map.put("month", month);
+        map.put("note", note);
+        
+        return map;
     }
 }

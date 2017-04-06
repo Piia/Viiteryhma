@@ -20,12 +20,12 @@
         <div class="col-2-2">
             <h2>Export references</h2>
             <div th:if="${success}">
-                BibTex file successfully generated!<br /><br />
+                BibTeX file successfully generated!<br /><br />
                 <a th:href="@{${filePath}}" class="button">Download</a>
             </div>
             <div th:if="not ${success}">
                 <form action="#" th:action="@{/export}" method="post">
-                    <button type="submit" class="button">Create a BibTex file</button>
+                    <button type="submit" class="button">Create a BibTeX file</button>
                 </form>
             </div>
         </div>
