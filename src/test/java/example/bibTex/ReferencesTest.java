@@ -37,14 +37,12 @@ public class ReferencesTest {
 
     @Before
     public void setUp() throws IOException {
-        l = new File("test.bib");
+        l = new File("test2.bib");
         instance = new References(l);
     }
 
     @After
     public void tearDown() throws IOException {
-        l = new File("test.bib");
-        instance = new References(l);
     }
 
     /**
