@@ -11,3 +11,5 @@ Kansiosta src/main/ pitäisi löytyä kaikki oleellinen. Javakoodi menee java/ex
 Näkymät generoidaan Thymeleafilla. 
 
 Pohjana ja apuna: https://spring.io/guides/gs/serving-web-content/#initial
+
+[Backlog](https://docs.google.com/spreadsheets/d/1t7VnaieM0K5aenRSlO_BqMIokqXBNDmfiIUJpaGqm7c/edit?usp=sharing)
