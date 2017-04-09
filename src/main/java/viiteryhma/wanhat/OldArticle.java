@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package example.References;
+package viiteryhma.wanhat;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Article {
+public class OldArticle {
     private final String type = "article";
     //required:
     //List luultavasti järkevämpi kuin pelkkä String, erityisesti kun myöhemmin listataan viitteet
@@ -36,7 +36,7 @@ public class Article {
     private String key;
 
     //or Article(String title, String journal, int year, String volume, String... author) ?
-    public Article(List<String> author, String title, String journal, String year, String volume) {
+    public OldArticle(List<String> author, String title, String journal, String year, String volume) {
         this.author = author;
         this.title = title;
         this.journal = journal;
@@ -50,7 +50,7 @@ public class Article {
         this.key = "";
     }
     
-    public Article() {
+    public OldArticle() {
         this.author = new ArrayList<>();
         this.title = "";
         this.journal = "";
