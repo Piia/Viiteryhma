@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package example;
+package viiteryhma;
 
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;

@@ -1,4 +1,4 @@
-package example;
+package viiteryhma;
 
 import example.bibTex.References;
 import example.bibTex.referencesToBibTex;

@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package example.bibTex;
+package viiteryhma.bibTex;
 
+import example.bibTex.References;
+import example.bibTex.referencesToBibTex;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;

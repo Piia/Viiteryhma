@@ -1,6 +1,7 @@
-package example;
+package viiteryhma;
 
-import example.References.Article;
+import viiteryhma.wanhat.MockDatabase;
+import viiteryhma.wanhat.OldArticle;
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -20,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class AppControllerTest {
+public class ApplicationControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -35,7 +36,7 @@ public class AppControllerTest {
     @Test
     public void shouldAddANewReference() throws Exception {
         MockDatabase.reset();
-        this.mockMvc.perform(post("/new", new Article())).andDo(print()).andExpect(status().isOk())
+        this.mockMvc.perform(post("/new", new OldArticle())).andDo(print()).andExpect(status().isOk())
                 .andExpect(model().attributeExists("success"));        
     }
     
@@ -49,7 +50,7 @@ public class AppControllerTest {
     @Test
     public void shouldGenerateBibTex() throws Exception {
         MockDatabase.reset();
-        MockDatabase.add(new Article());
+        MockDatabase.add(new OldArticle());
         this.mockMvc.perform(post("/export")).andDo(print()).andExpect(status().isOk())
                 .andExpect(content().string(containsString("author = {")));        
     }
