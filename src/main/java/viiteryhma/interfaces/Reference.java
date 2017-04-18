@@ -11,8 +11,5 @@ package viiteryhma.interfaces;
  * @author Piia Hartikka
  */
 public interface Reference {
-    
-    public String getType();
-    public String getFields();
 
 }
