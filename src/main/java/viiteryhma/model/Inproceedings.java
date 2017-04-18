@@ -16,23 +16,27 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 
 @Entity
-public class Article extends AbstractPersistable<Long> {
+public class Inproceedings extends AbstractPersistable<Long> {
     
     
     //required
-    //@NotBlank
+    //@NotBlank ??
     private String author;
     private String title;
-    private String journal;
+    private String booktitle;
     private String year;
-    private String volume;
 
 
     //optional:
     private String key;
-    private String number;
+    private String editor;
+    private String volume;
+    private String series;
     private String pages;
+    private String address;
     private String month;
+    private String organization;
+    private String publisher;
     private String note;
 
     public String getNote() {
@@ -67,14 +71,6 @@ public class Article extends AbstractPersistable<Long> {
         this.title = title;
     }
 
-    public String getJournal() {
-        return journal;
-    }
-
-    public void setJournal(String journal) {
-        this.journal = journal;
-    }
-
     public String getYear() {
         return year;
     }
@@ -91,12 +87,53 @@ public class Article extends AbstractPersistable<Long> {
         this.volume = volume;
     }
 
-    public String getNumber() {
-        return number;
+
+    public String getMonth() {
+        return month;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public void setSeries(String series) {
+        this.series = series;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getBooktitle() {
+        return booktitle;
+    }
+
+    public void setBooktitle(String booktitle) {
+        this.booktitle = booktitle;
+    }
+
+    public String getEditor() {
+        return editor;
+    }
+
+    public void setEditor(String editor) {
+        this.editor = editor;
     }
 
     public String getPages() {
@@ -107,13 +144,14 @@ public class Article extends AbstractPersistable<Long> {
         this.pages = pages;
     }
 
-    public String getMonth() {
-        return month;
+    public String getOrganization() {
+        return organization;
     }
 
-    public void setMonth(String month) {
-        this.month = month;
+    public void setOrganization(String organization) {
+        this.organization = organization;
     }
+
 
 
 

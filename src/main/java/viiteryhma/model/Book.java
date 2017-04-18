@@ -16,22 +16,23 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 
 @Entity
-public class Article extends AbstractPersistable<Long> {
+public class Book extends AbstractPersistable<Long> {
     
     
     //required
-    //@NotBlank
+    //@NotBlank ??
     private String author;
     private String title;
-    private String journal;
+    private String publisher;
     private String year;
-    private String volume;
 
 
     //optional:
     private String key;
-    private String number;
-    private String pages;
+    private String volume;
+    private String series;
+    private String address;
+    private String edition;
     private String month;
     private String note;
 
@@ -67,14 +68,6 @@ public class Article extends AbstractPersistable<Long> {
         this.title = title;
     }
 
-    public String getJournal() {
-        return journal;
-    }
-
-    public void setJournal(String journal) {
-        this.journal = journal;
-    }
-
     public String getYear() {
         return year;
     }
@@ -91,21 +84,6 @@ public class Article extends AbstractPersistable<Long> {
         this.volume = volume;
     }
 
-    public String getNumber() {
-        return number;
-    }
-
-    public void setNumber(String number) {
-        this.number = number;
-    }
-
-    public String getPages() {
-        return pages;
-    }
-
-    public void setPages(String pages) {
-        this.pages = pages;
-    }
 
     public String getMonth() {
         return month;
@@ -113,6 +91,38 @@ public class Article extends AbstractPersistable<Long> {
 
     public void setMonth(String month) {
         this.month = month;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public String getSeries() {
+        return series;
+    }
+
+    public void setSeries(String series) {
+        this.series = series;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getEdition() {
+        return edition;
+    }
+
+    public void setEdition(String edition) {
+        this.edition = edition;
     }
 
 
