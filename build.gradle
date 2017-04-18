@@ -25,7 +25,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     testCompile 'info.cukes:cucumber-java:' + cucumberVersion
     testCompile 'info.cukes:cucumber-junit:' + cucumberVersion
-    runtime 
+    
 }
 
 
