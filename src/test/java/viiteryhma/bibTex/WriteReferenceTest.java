@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package example.bibTex;
+package viiteryhma.bibTex;
 
+import example.bibTex.WriteReference;
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
