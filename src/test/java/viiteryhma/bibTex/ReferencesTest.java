@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
  */
 public class ReferencesTest {
 
-    private referencesToBibTex instance;
+    private References instance;
     private File l;
 
     public ReferencesTest() {

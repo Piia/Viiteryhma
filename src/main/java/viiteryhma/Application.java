@@ -1,6 +1,6 @@
 package viiteryhma;
 
-import example.bibTex.References;
+import example.bibTex.ReferenceToString;
 import example.bibTex.referencesToBibTex;
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +13,7 @@ public class Application {
     public static void main(String[] args) throws IOException {
         SpringApplication.run(Application.class, args);
         File l = new File("test.bib");
-        referencesToBibTex k = new References(l);
+        referencesToBibTex k = new ReferenceToString();
         
         k.HederAndItsType("VPL11", "inproceedings");
         k.OneFieldAndItsType("Vihavainen, Arto and Paksula, Matti and Luukkainen, Matti", "author");
@@ -29,7 +29,8 @@ public class Application {
         k.OneFieldAndItsType("Addison-Wesley Professional", "publisher");
         k.EndReference();
         
-        k.EndFile();
+        String r = k.EndFile();
+        
     }
 
 }   
