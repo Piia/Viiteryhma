@@ -10,11 +10,6 @@ import javax.persistence.*;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 
-/**
- *
- * @author Piia Hartikka
- */
-
 @Entity
 public class Book extends AbstractPersistable<Long> {
     
@@ -35,6 +30,15 @@ public class Book extends AbstractPersistable<Long> {
     private String edition;
     private String month;
     private String note;
+    private String number;
+    
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
 
     public String getNote() {
         return note;
