@@ -13,7 +13,7 @@ import java.io.IOException;
  *
  * @author tiera
  */
-public class References implements referencesToBibTex {
+public class References  {
 
     private File file;
     private FileWriter filewriter;
@@ -27,23 +27,20 @@ public class References implements referencesToBibTex {
         this.r = new ReferenceToRightFormat();
     }
     
-    @Override
     public void HederAndItsType(String heder, String type){ //tallentaa sopivaan ArrayList muotoon viitauksen otsikon (heder) ja tämän tyypin (type)
         r.Entry(type, heder);
     }
     
-    @Override
     public void OneFieldAndItsType(String field, String type){ //tallentaa sopivaan ArrayList mutoon viitauksen kentän (field) ja tämän tyypin (type)
         r.oneKeyField(type, field);
     }
     
-    @Override
     public void EndReference() throws IOException{ //sulkee referaatin (tulostaa kaine ulos arraylist muodosta) ja kirjottaa sen sisällön oikeissa puitteissa referaattiin
         o.greatnewreference(r.referense());
     }
     
-    @Override
     public void EndFile() throws IOException{ // sulkee kirjotettavan tiedoston
         o.save();
+        
     }
 }
