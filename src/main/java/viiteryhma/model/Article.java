@@ -6,9 +6,12 @@
 
 package viiteryhma.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.persistence.*;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import viiteryhma.interfaces.Reference;
 
 /**
  *
@@ -16,8 +19,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 
 @Entity
-public class Article extends AbstractPersistable<Long> {
-    
+public class Article extends AbstractPersistable<Long> implements Reference {
+    private final String type = "article";
     
     //required
     //@NotBlank
@@ -114,9 +117,28 @@ public class Article extends AbstractPersistable<Long> {
     public void setMonth(String month) {
         this.month = month;
     }
+    
+    @Override
+    public String getType() {
+        return type;
+    }
 
+    @Override
+    public Map<String, String> getFields() {
+        Map<String, String> map = new HashMap<>();
+    
+        map.put("author", author);
+        map.put("journal", journal);
+        map.put("key", key);
+        map.put("month", month);
+        map.put("note", note);
+        map.put("number", number);
+        map.put("pages", pages);
+        map.put("title", title);
+        map.put("volume", volume);
+        map.put("year", year);
 
-
-
+        return map;
+    }
 
 }

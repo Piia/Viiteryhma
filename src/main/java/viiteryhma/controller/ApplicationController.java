@@ -1,5 +1,6 @@
 package viiteryhma.controller;
 
+import example.bibTex.ReferenceToString;
 import viiteryhma.wanhat.OldArticle;
 import example.bibTex.References;
 import example.bibTex.referencesToBibTex;
@@ -11,6 +12,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -23,6 +25,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import viiteryhma.interfaces.Reference;
 import viiteryhma.model.Article;
@@ -43,18 +46,21 @@ public class ApplicationController {
     private BookRepository bookRepo;
     @Autowired
     private InproceedingsRepository inproceedingsRepo;
+    
+    protected void initializeModels(Model model) {
+        model.addAttribute("article", new Article());
+        model.addAttribute("book", new Book());
+        model.addAttribute("inproceedings", new Inproceedings());
+    }
 
     @GetMapping("/")
     public String app(Model model) {
-        //model.addAttribute("article", new Article());
         return "redirect:/new";
     }
     
     @GetMapping("/new")
     public String getNewReference(Model model) {
-        model.addAttribute("article", new Article());
-        model.addAttribute("book", new Book());
-        model.addAttribute("inproceedings", new Inproceedings());
+        this.initializeModels(model);
         return "new";
     }
     
@@ -68,7 +74,8 @@ public class ApplicationController {
     public String postNewArticle(Model model, @ModelAttribute Article article) {
         articleRepo.save(article);
         model.addAttribute("success", true);
-        model.addAttribute("article", new Article());
+        
+        this.initializeModels(model);
         return "new";
     }
     
@@ -76,7 +83,8 @@ public class ApplicationController {
     public String postNewBook(Model model, @ModelAttribute Book book) {
         bookRepo.save(book);
         model.addAttribute("success", true);
-        model.addAttribute("book", new Book());
+        
+        this.initializeModels(model);
         return "new";
     }
     
@@ -84,7 +92,8 @@ public class ApplicationController {
     public String postNewInproceedings(Model model, @ModelAttribute Inproceedings inproceedings) {
         inproceedingsRepo.save(inproceedings);
         model.addAttribute("success", true);
-        model.addAttribute("inproceedings", new Inproceedings());
+        
+        this.initializeModels(model);
         return "new";
     }
     
@@ -94,58 +103,73 @@ public class ApplicationController {
     }
     
     @PostMapping("/export")
-    public String postExportReferences(Model model) {
-        model.addAttribute("success", true);
+    public String postExportReferences(Model model, HttpServletRequest req) {
+        //model.addAttribute("success", true);
+        String name = req.getParameter("name");
         
-        String key = String.format("%d%m%Y_%H%M", new Date());
-        model.addAttribute("bibtex_file", "/files/references_" + key + ".bib");
+        if (name.isEmpty()) {
+            name = "references";
+        }
         
-        return "export";
+        return "redirect:/files/" + name + ".bib";
     }
     
-    @GetMapping(value="/files/references_{key}.bib", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @GetMapping(value="/files/{name}.bib", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
     @ResponseBody
-    public ByteArrayResource getBibTexFile(@PathVariable String key) {
-        System.out.println("Key: " + key);
-        return new ByteArrayResource(exports.get(key).getBytes());
+    public ByteArrayResource getBibTexFile() {
+        return new ByteArrayResource(this.generateBibTex().getBytes());
     }
     
-//    @PostMapping("/export")
-//    @ResponseBody
-//    public FileSystemResource postExportReferences(Model model) {
-//        File generated = this.generateBibTex();
-//        
-//        model.addAttribute("filePath", "/files/references.bib");
-//        model.addAttribute("success", true);
-//        
-//        return new FileSystemResource(generated);
-//    }
-    
-//    public File generateBibTex() {
-//        try {
-//            
-//            List<Article> references = articleRepo.findAll();
-//            File l = new File("src/main/resources/static/files/references.bib");
-//            referencesToBibTex k = new References(l);
-//
-//            for (Article ref : references) {
-//                k.HederAndItsType(ref.getKey(), ref.getType());
-//                Map<String,String> fields = ref.getFields();
-//
-//                fields.keySet().stream().forEach((key) -> {
-//                    k.OneFieldAndItsType(fields.get(key), key);
-//                });
-//
-//                k.EndReference();
-//            }
-//
-//            k.EndFile();
-//                        
-//            return l;
-//        } catch (Exception e) {
-//            System.out.println("Error generating BibTeX: " + e);
-//            return null;
-//        }
-//        
-//    }
+    public String generateBibTex() {
+        /*
+            Tämä nyt tämmöinen väliaikainen taas.
+        */
+        
+        List<Article> articles = articleRepo.findAll();
+        List<Book> books = bookRepo.findAll();
+        List<Inproceedings> inproceedings = inproceedingsRepo.findAll();
+
+        referencesToBibTex k = new ReferenceToString();
+
+        for (Article ref : articles) {
+            Map<String,String> fields = ref.getFields();
+            k.HederAndItsType(fields.get("key"), ref.getType());
+
+            fields.keySet().stream().forEach((name) -> {
+                if (!name.equals("key")) {
+                  k.OneFieldAndItsType(fields.get(name), name);
+                }
+            });
+
+            k.EndReference();
+        }
+
+        for (Book ref : books) {
+            Map<String,String> fields = ref.getFields();
+            k.HederAndItsType(fields.get("key"), ref.getType());
+
+            fields.keySet().stream().forEach((name) -> {
+                if (!name.equals("key")) {
+                  k.OneFieldAndItsType(fields.get(name), name);
+                }
+            });
+
+            k.EndReference();
+        }
+
+        for (Inproceedings ref : inproceedings) {
+            Map<String,String> fields = ref.getFields();
+            k.HederAndItsType(fields.get("key"), ref.getType());
+
+            fields.keySet().stream().forEach((name) -> {
+                if (!name.equals("key")) {
+                  k.OneFieldAndItsType(fields.get(name), name);
+                }
+            });
+
+            k.EndReference();
+        }
+
+        return k.EndFile();
+    }
 }

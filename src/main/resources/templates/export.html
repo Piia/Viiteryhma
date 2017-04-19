@@ -25,7 +25,9 @@
             </div>
             <div th:if="not ${success}">
                 <form action="#" th:action="@{/export}" method="post">
-                    <button type="submit" class="button">Create a BibTeX file</button>
+                    <label for="export-filename">Filename (without .bib):</label>
+                    <input type="text" name="name" id="export-filename" placeholder="references" />
+                    <button type="submit" class="button">Generate a BibTeX file</button>
                 </form>
             </div>
         </div>
