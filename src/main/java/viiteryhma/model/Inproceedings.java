@@ -6,9 +6,12 @@
 
 package viiteryhma.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.persistence.*;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import viiteryhma.interfaces.Reference;
 
 /**
  *
@@ -16,8 +19,8 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
  */
 
 @Entity
-public class Inproceedings extends AbstractPersistable<Long> {
-    
+public class Inproceedings extends AbstractPersistable<Long> implements Reference {
+    private final String type = "inproceedings";
     
     //required
     //@NotBlank ??
@@ -152,9 +155,30 @@ public class Inproceedings extends AbstractPersistable<Long> {
         this.organization = organization;
     }
 
+    @Override
+    public String getType() {
+        return type;
+    }
 
+    @Override
+    public Map<String, String> getFields() {
+        Map<String, String> map = new HashMap<>();
+        
+        map.put("address", address);
+        map.put("author", author);
+        map.put("booktitle", booktitle);
+        map.put("editor", editor);
+        map.put("key", key);
+        map.put("month", month);
+        map.put("note", note);
+        map.put("organization", organization);
+        map.put("pages", pages);
+        map.put("publisher", publisher);
+        map.put("series", series);
+        map.put("title", title);
+        map.put("volume", volume);
+        map.put("year", year);
 
-
-
-
+        return map;
+    }
 }

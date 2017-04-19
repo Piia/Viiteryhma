@@ -6,13 +6,16 @@
 
 package viiteryhma.model;
 
+import java.util.HashMap;
+import java.util.Map;
 import javax.persistence.*;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
+import viiteryhma.interfaces.Reference;
 
 @Entity
-public class Book extends AbstractPersistable<Long> {
-    
+public class Book extends AbstractPersistable<Long> implements Reference {
+    private final String type = "book";
     
     //required
     //@NotBlank ??
@@ -129,8 +132,30 @@ public class Book extends AbstractPersistable<Long> {
         this.edition = edition;
     }
 
+    @Override
+    public String getType() {
+        return type;
+    }
 
+    @Override
+    public Map<String, String> getFields() {
+        Map<String, String> map = new HashMap<>();
+        
+        map.put("address", address);
+        map.put("author", author);
+        map.put("edition", edition);
+        map.put("key", key);
+        map.put("month", month);
+        map.put("note", note);
+        map.put("number", number);
+        map.put("publisher", publisher);
+        map.put("series", series);
+        map.put("title", title);
+        map.put("volume", volume);
+        map.put("year", year);
 
+        return map;
+    }
 
 
 }

@@ -6,10 +6,13 @@
 
 package viiteryhma.interfaces;
 
+import java.util.Map;
+
 /**
  *
  * @author Piia Hartikka
  */
 public interface Reference {
-
+    String getType();
+    Map<String, String> getFields();
 }
