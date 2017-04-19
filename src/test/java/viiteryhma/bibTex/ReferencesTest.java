@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package example.bibTex;
+package viiteryhma.bibTex;
 
+import example.bibTex.References;
+import example.bibTex.referencesToBibTex;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
@@ -37,14 +39,12 @@ public class ReferencesTest {
 
     @Before
     public void setUp() throws IOException {
-        l = new File("test.bib");
+        l = new File("test2.bib");
         instance = new References(l);
     }
 
     @After
     public void tearDown() throws IOException {
-        l = new File("test.bib");
-        instance = new References(l);
     }
 
     /**

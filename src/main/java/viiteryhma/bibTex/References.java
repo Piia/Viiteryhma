@@ -22,7 +22,7 @@ public class References  {
 
     public References(File file) throws IOException { //alustaa referaatin
         this.file = file;
-        this.filewriter = new FileWriter(file);
+        this.filewriter = new FileWriter(file, true);
         this.o = new WriteReference(filewriter);
         this.r = new ReferenceToRightFormat();
     }

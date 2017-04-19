@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package example.References;
+package viiteryhma.References;
 
+import viiteryhma.wanhat.OldArticle;
 import java.util.Arrays;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -15,7 +16,7 @@ import static org.junit.Assert.*;
 
 public class ArticleTest {
 
-    Article article;
+    OldArticle article;
 
     public ArticleTest() {
     }
@@ -30,7 +31,7 @@ public class ArticleTest {
 
     @Before
     public void setUp() {
-        article = new Article(Arrays.asList("Anthony Robins", "Janet Rountree", "Nathan Rountree"),
+        article = new OldArticle(Arrays.asList("Anthony Robins", "Janet Rountree", "Nathan Rountree"),
                 "Learning and teaching programming: A review and discussion",
                 "Computer Science Education", "2003", "13");
     }

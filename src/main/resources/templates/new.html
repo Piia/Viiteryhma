@@ -23,10 +23,12 @@
                 Reference added successfully!
             </div>
             <form action="#" th:action="@{/new}" th:object="${article}" method="post">
-                <label for="reference-type">Type</label>
+<!--                <label for="reference-type">Type</label>
                 <select id="reference-type">
                     <option value="article">Article</option>
-                </select>
+                </select> -->
+                <label for="reference-key">Key</label>
+                <input type="text" th:field="*{key}" id="reference-key" />
                 <label for="reference-author">Author</label>
                 <input type="text" th:field="*{author}" id="reference-author" />
                 <label for="reference-journal">Journal</label>

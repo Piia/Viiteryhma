@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package example.bibTex;
+package viiteryhma.bibTex;
 
+import example.bibTex.ReferenceToRightFormat;
 import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
