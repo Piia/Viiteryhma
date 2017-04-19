@@ -11,11 +11,11 @@ import java.io.IOException;
  *
  * @author tiera
  */
-public interface referencesToBibTex { 
+public interface referencesToBibTex{ 
     
-    void EndFile() throws IOException;
+    String EndFile();
 
-    void EndReference() throws IOException;
+    void EndReference();
 
     void HederAndItsType(String heder, String type);
 
