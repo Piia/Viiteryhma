@@ -5,7 +5,6 @@
  */
 package example.bibTex;
 
-import java.util.Scanner;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -53,17 +52,15 @@ public class ReferenceToStringTest {
         System.out.println("EndFile");
         String heder = "VPL11";
         String type = "inproceedings";
+        instance = new ReferenceToString();
         instance.HederAndItsType(heder, type);
         instance.OneFieldAndItsType("Vihavainen, Arto and Paksula, Matti and Luukkainen, Matti", "author");
         instance.EndReference();
         String s = instance.EndFile();
-        String d = "";
-        d += "@inproceedings{VPL11, \n";
-        d += "author = {Vihavainen, Arto and Paksula, Matti and Luukkainen, Matti}, \n";
-        d += "} \n";
-        d += "\n";
-        d += "\n";
-        assertEquals(d, s);
+        
+        assertEquals(true, s.contains("@inproceedings{VPL11,"));
+        assertEquals(true, s.contains("author = {Vihavainen, Arto and Paksula, Matti and Luukkainen, Matti},"));
+        assertEquals(true, s.contains("}"));
     }
     
 }
