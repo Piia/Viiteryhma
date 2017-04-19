@@ -31,7 +31,6 @@ public class Application {
         k.EndReference();
         
         String r = k.EndFile();
-        System.out.println(r);
         
     }
 
