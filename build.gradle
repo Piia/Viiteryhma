@@ -28,7 +28,7 @@ task( browse, dependsOn: jar, type: JavaExec ) {
 }
 project.ext {
     cucumberVersion = '1.2.5'
-    seleniumVersion = '2.53.1'
+    seleniumVersion = '2.53.0'
 }
 
 

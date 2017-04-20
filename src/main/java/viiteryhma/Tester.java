@@ -25,6 +25,7 @@ public class Tester {
         element.sendKeys("asdas");
         element = driver.findElement(By.id("article-year"));
         element.sendKeys("asdasd");
+        element.submit();
         sleep(2);
         element = driver.findElement(By.linkText("Add a reference"));
         element.click();
