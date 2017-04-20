@@ -2,6 +2,7 @@ buildscript {
     ext {
         springBootVersion = '1.5.2.RELEASE'
         cucumberVersion = '1.2.5'
+        seleniumVersion = '2.41.0'
     }
     repositories {
         mavenCentral()
@@ -13,31 +14,38 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
-
+apply plugin: 'build-dashboard'
 apply plugin: "jacoco" 
 
 repositories {
     jcenter()
-}
-
-dependencies {
-    compile 'com.google.guava:guava:20.0'  
-    testCompile 'junit:junit:4.12'
-    testCompile 'info.cukes:cucumber-java:' + cucumberVersion
-    testCompile 'info.cukes:cucumber-junit:' + cucumberVersion
-    
-}
-
-
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
-
-repositories {
     mavenCentral()
 }
 
 
+
+task( browse, dependsOn: jar, type: JavaExec ) {
+    main = 'viiteryhma.Tester'
+    classpath = sourceSets.main.runtimeClasspath
+}
+project.ext {
+    cucumberVersion = '1.2.5'
+    seleniumVersion = '2.41.0'
+}
+
+
+
 dependencies {
+    compile 'com.google.guava:guava:20.0'  
+    testCompile 'junit:junit:4.12'
+    testCompile group: 'org.fluentlenium', name: 'fluentlenium-core', version: '0.10.3'
+    testCompile group: 'org.fluentlenium', name: 'fluentlenium-assertj', version: '0.10.3' 
+    testCompile 'info.cukes:cucumber-java:' + cucumberVersion
+    testCompile 'info.cukes:cucumber-junit:' + cucumberVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-firefox-driver', version:seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version:seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-api', version:seleniumVersion
+    compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:seleniumVersion    
     compile('org.springframework.boot:spring-boot-starter-web')
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile('org.springframework.boot:spring-boot-starter-data-jpa:1.5.2.RELEASE')
@@ -46,3 +54,13 @@ dependencies {
     // MUISTA LISÄTÄ TUOTANTOON OMA TIETOKANTARIIPPUVUUS
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
+
+test {
+    testLogging.showStandardStreams = true
+    systemProperties System.getProperties()
+}
+
+
+version = '0.0.1-SNAPSHOT'
+
+
