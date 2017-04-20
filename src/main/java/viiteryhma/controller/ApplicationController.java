@@ -36,9 +36,7 @@ import viiteryhma.repositories.BookRepository;
 import viiteryhma.repositories.InproceedingsRepository;
 
 @Controller
-public class ApplicationController {
-    private Map<String, String> exports = new HashMap<>();
-    
+public class ApplicationController {    
     // Tämä toimii ns. tietokantana!
     @Autowired
     private ArticleRepository articleRepo;
@@ -129,7 +127,7 @@ public class ApplicationController {
         return new ByteArrayResource(this.generateBibTex().getBytes());
     }
     
-    public String generateBibTex() {
+    protected String generateBibTex() {
         /*
             Tämä nyt tämmöinen väliaikainen taas.
         */

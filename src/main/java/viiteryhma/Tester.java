@@ -15,12 +15,24 @@ public class Tester {
         WebDriver driver = new ChromeDriver();
 
         driver.get("http://localhost:8080/");
+        
         sleep(2);
-        //WebElement element = driver.findElement(By.linkText("Add a reference"));
-        //element.click();
+        WebElement element = driver.findElement(By.id("article-author"));
+        element.sendKeys("asdas");
+        element = driver.findElement(By.id("article-journal"));
+        element.sendKeys("asdasd");
+        element = driver.findElement(By.id("article-volume"));
+        element.sendKeys("asdas");
+        element = driver.findElement(By.id("article-year"));
+        element.sendKeys("asdasd");
         sleep(2);
-        //element.submit();
-        //driver.quit();
+        element = driver.findElement(By.linkText("Add a reference"));
+        element.click();
+        sleep(2);
+        element = driver.findElement(By.linkText("Export references"));
+        element.click();
+        sleep(2);
+        driver.quit();
     }
 
     private static void sleep(int n) {
