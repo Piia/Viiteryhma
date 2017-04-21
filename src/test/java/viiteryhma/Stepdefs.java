@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
  * @author tierahir
  */
 public class Stepdefs {
-
+/*
     References r;
     File l;
 
@@ -45,4 +45,5 @@ public class Stepdefs {
         String g = t.nextLine();
         assertEquals(val, g);
     }
+    */
 }
