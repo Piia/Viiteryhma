@@ -93,6 +93,36 @@ public class ApplicationControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("<h2>Add a reference</h2>")));
     }
+    
+    @Test
+    public void testListReferencesHasArticleWHenArticleAddedToDb() throws Exception {
+        articleRepo.save(getMockArticle());
+        
+        this.mockMvc
+                .perform(get("/references"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("<h3>Articles</h3>")))
+                .andExpect(content().string(containsString("<li>Author: Pekka</li>")));
+    }
+    
+    @Test
+    public void testListReferencesShowsReferencesWhenMultipleAddedToTheDb() throws Exception {
+        articleRepo.save(getMockArticle());
+        bookRepo.save(getMockBook());
+        inproceedingsRepo.save(getMockInproceedings());
+        
+        this.mockMvc
+                .perform(get("/references"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().string(containsString("<h3>Articles</h3>")))
+                .andExpect(content().string(containsString("<li>Journal: Julkaisu</li>")))
+                .andExpect(content().string(containsString("<h3>Books</h3>")))
+                .andExpect(content().string(containsString("<li>Publisher: Julkaisija</li>")))
+                .andExpect(content().string(containsString("<h3>Inproceedings</h3>")))
+                .andExpect(content().string(containsString("<li>Booktitle: Kirjan otsikko</li>")));
+    }
 
     @Test
     public void testAddANewArticleReference() throws Exception {              

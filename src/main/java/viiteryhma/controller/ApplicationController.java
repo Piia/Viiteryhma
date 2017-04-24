@@ -68,6 +68,15 @@ public class ApplicationController {
         return "articles";
     }
     
+    @GetMapping("/references")
+    public String getAllReferences(Model model) {
+        model.addAttribute("articles", articleRepo.findAll());
+        model.addAttribute("books", bookRepo.findAll());
+        model.addAttribute("inproceedings", inproceedingsRepo.findAll());
+        
+        return "references";
+    }
+    
     @PostMapping("/new/article")
     public String postNewArticle(Model model, @ModelAttribute Article article) {
         articleRepo.save(article);
