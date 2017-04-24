@@ -11,9 +11,8 @@ public class Tester {
 
     
     public static void main(String[] args) {
-        System.setProperty("webdriver.chrome.driver", "/home/tiera/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
         WebDriver driver = new ChromeDriver();
-
         driver.get("http://localhost:8080/");
         
         sleep(2);
