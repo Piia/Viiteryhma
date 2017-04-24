@@ -5,6 +5,8 @@
  */
 package example.bibTex;
 
+import example.bibTex.characters.StringWhitSpecialCharacters;
+
 /**
  *
  * @author tiera
@@ -12,20 +14,22 @@ package example.bibTex;
 public class ReferenceToString implements referencesToBibTex{
     private StringReference o;
     private ReferenceToRightFormat r;
+    private StringWhitSpecialCharacters g;
 
     public ReferenceToString(){ //alustaa referaatin
         this.o = new StringReference();
         this.r = new ReferenceToRightFormat();
+        this.g = new StringWhitSpecialCharacters();
     }
     
     @Override
     public void HederAndItsType(String heder, String type){ //tallentaa sopivaan ArrayList muotoon viitauksen otsikon (heder) ja tämän tyypin (type)
-        r.Entry(type, heder);
+        r.Entry(g.specialCharacters(type), g.specialCharacters(heder));
     }
     
     @Override
     public void OneFieldAndItsType(String field, String type){ //tallentaa sopivaan ArrayList mutoon viitauksen kentän (field) ja tämän tyypin (type)
-        r.oneKeyField(type, field);
+        r.oneKeyField(g.specialCharacters(type), g.specialCharacters(field));
     }
     
     @Override
