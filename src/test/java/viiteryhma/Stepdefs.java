@@ -25,16 +25,16 @@ public class Stepdefs {
 //    stepit, eli testien suorittaminen
 //    Tähän kopsasin laskareista esimerkin stepeistä. Lopussa alimpana Tieran koodit.
 
-//    private WebDriver driver;
-//    private String baseUrl;
-//    
-//    @Before
-//    public void setUp() {
-//        System.setProperty("webdriver.chrome.driver", "chromedriver");
-//        driver = new ChromeDriver();
-//        baseUrl = "http://localhost:4567";
-//    }
-//    
+    private WebDriver driver;
+    private String baseUrl;
+    
+    @Before
+    public void setUp() {
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
+        driver = new ChromeDriver();
+        baseUrl = "http://localhost:4567";
+    }
+    
 //    @Given("^login is selected$")
 //    public void login_selected() throws Throwable {
 //        driver.get(baseUrl);
