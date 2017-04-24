@@ -21,7 +21,7 @@ public class ServerRule extends ExternalResource{
     public ServerRule(int port) {
         this.port = port;
     }
-    
+   /* 
     @Override
     protected void before() throws Throwable {
         System.setProperty("webdriver.chrome.driver", "/home/tiera/chromedriver");
@@ -31,4 +31,5 @@ public class ServerRule extends ExternalResource{
         Main.setDao(dao);
         Main.main(null);
     }
+*/
 }
