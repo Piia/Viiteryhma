@@ -99,3 +99,12 @@ select {
 form button {
     margin-top: 10px;
 }
+
+ul.references {
+    list-style: none;
+    
+    margin: 0;
+    padding: 15px 0;
+    
+    border-bottom: 1px dashed grey;
+}
