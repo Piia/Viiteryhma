@@ -65,7 +65,7 @@ public class Stepdefs {
         giveValueToField(key, "inproceedings-key");
         giveValueToField(author, "inproceedings-author");
         giveValueToField(title, "inproceedings-title");
-        giveValueToField(booktitle, "inproceedings-publisher");
+        giveValueToField(booktitle, "inproceedings-booktitle");
         giveValueToField(year, "inproceedings-year");
     }
     
@@ -89,8 +89,8 @@ public class Stepdefs {
     
     @Then("^reference is added$")
     public void reference_is_added() throws Throwable {
-        //try{ Thread.sleep(120000); } catch(Exception e){}  // suoritus pysähtyy 120 sekunniksi
-        //assertTrue(driver.getPageSource().contains("Reference added successfully!"));
+//        try{ Thread.sleep(30000); } catch(Exception e){}  // suoritus pysähtyy 120 sekunniksi
+        assertTrue(driver.getPageSource().contains("Reference added successfully!"));
     }
     
     @Then("^reference is not added$")
