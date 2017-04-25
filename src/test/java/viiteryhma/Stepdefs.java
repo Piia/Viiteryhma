@@ -20,11 +20,6 @@ import org.openqa.selenium.support.ui.Select;
 
 public class Stepdefs {
     
-    
-    
-//    Elikkä tähän tiedostoon kirjoitetaan featureiden sisältämien scenarioiden
-//    stepit, eli testien suorittaminen
-//    Tähän kopsasin laskareista esimerkin stepeistä. Lopussa alimpana Tieran koodit.
 
     private WebDriver driver;
     private String baseUrl;
