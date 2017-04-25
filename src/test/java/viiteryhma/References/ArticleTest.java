@@ -3,104 +3,100 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 package viiteryhma.References;
 
-import viiteryhma.wanhat.OldArticle;
-import java.util.Arrays;
-import org.junit.After;
-import org.junit.AfterClass;
+import java.util.Map;
+import static org.junit.Assert.assertEquals;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import viiteryhma.model.Article;
 
+/**
+ *
+ * @author Piia Hartikka
+ */
 public class ArticleTest {
-
-    OldArticle article;
-
-    public ArticleTest() {
-    }
-
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
+    
+    private Article article;
+    
     @Before
     public void setUp() {
-        article = new OldArticle(Arrays.asList("Anthony Robins", "Janet Rountree", "Nathan Rountree"),
-                "Learning and teaching programming: A review and discussion",
-                "Computer Science Education", "2003", "13");
-    }
-
-    @After
-    public void tearDown() {
-    }
-
-    @Test
-    public void constructorSetsTheRequiredAttributesCorrectly() {
-        String[] authors = {"Anthony Robins", "Janet Rountree", "Nathan Rountree"};
-        for(String author : authors) {
-            assertTrue(article.getAuthor().contains(author));
-        }
-        assertTrue(article.getAuthor().size() == authors.length);
-        
-        assertEquals("Learning and teaching programming: A review and discussion", article.getTitle());
-        assertEquals("Computer Science Education", article.getJournal());
-        assertEquals("2003", article.getYear());
-        assertEquals("13", article.getVolume());
-    }
-
-    @Test
-    public void constructorSetsTheOptionalAttributesToEmptyStrings() {
-        assertTrue(article.getNumber().isEmpty()
-                && article.getPages().isEmpty()
-                && article.getMonth().isEmpty()
-                && article.getNote().isEmpty()
-                && article.getKey().isEmpty());
-    }
-    
-    @Test
-    public void settingTheOptionalAttributesNumberPagesAndKeyWorks() {
-        article.setNumber("test number");
-        article.setPages("12-13, 34-38");
+        article = new Article();
+        article.setAuthor("author");
+        article.setTitle("title");
+        article.setJournal("journal");
+        article.setYear("year");
         article.setKey("key");
+        article.setVolume("volume");
+        article.setMonth("month");
+        article.setNote("note");
+        article.setNumber("number");
         
-        assertEquals("test number", article.getNumber());
-        assertEquals("12-13, 34-38", article.getPages());
-        assertEquals("key", article.getKey());
-    }
-
-    @Test
-    public void toStringProducesTheRightOutputWhenOptionalAttributesMonthAndNoteAreSet() {
-        article.setMonth("August");
-        article.setNote("toString test");
-                
-        assertEquals("Authors: Anthony Robins, Janet Rountree and Nathan Rountree\n"
-                + "Title: Learning and teaching programming: A review and discussion\n"
-                + "Journal: Computer Science Education\n"
-                + "Year: 2003\n"
-                + "Volume: 13\n"
-                + "Month: August\n"
-                + "Note: toString test\n\n", article.toString());
     }
     
     @Test
-    public void toStringProducesTheRightOutputWhenOptionalAttributesNumberPagesAndKeyAreSet() {
-        article.setNumber("August");
-        article.setPages("54-59");
-        article.setKey("jingle bells");
-                
-        assertEquals("Authors: Anthony Robins, Janet Rountree and Nathan Rountree\n"
-                + "Title: Learning and teaching programming: A review and discussion\n"
-                + "Journal: Computer Science Education\n"
-                + "Year: 2003\n"
-                + "Volume: 13\n"
-                + "Number: August\n"
-                + "Pages: 54-59\n"
-                + "Key: jingle bells\n\n", article.toString());
+    public void setUpTest() {
+        assertEquals(article.getAuthor(), "author");
+        assertEquals(article.getTitle(), "title");
+        assertEquals(article.getYear(), "year");
+        assertEquals(article.getKey(), "key");
+        assertEquals(article.getVolume(), "volume");
+        assertEquals(article.getNumber(), "number");
+        assertEquals(article.getMonth(), "month");
+        assertEquals(article.getNote(), "note");
+        assertEquals(article.getJournal(), "journal");
     }
+    
+    @Test
+    public void typeTest() {
+        assertEquals(article.getType(), "article");
+    }
+    
+    @Test
+    public void getFieldsTest() {
+        Map<String, String> fields = article.getFields();
+        assertEquals(fields.get("author"), "author");
+        assertEquals(fields.get("title"), "title");
+        assertEquals(fields.get("year"), "year");
+        assertEquals(fields.get("key"), "key");
+        assertEquals(fields.get("volume"), "volume");
+        assertEquals(fields.get("number"), "number");
+        assertEquals(fields.get("month"), "month");
+        assertEquals(fields.get("note"), "note");
+        assertEquals(fields.get("journal"), "journal");
+        
+    }
+
 }
+
+
+//    @Test
+//    public void toStringProducesTheRightOutputWhenOptionalAttributesMonthAndNoteAreSet() {
+//        article.setMonth("August");
+//        article.setNote("toString test");
+//                
+//        assertEquals("Authors: Anthony Robins, Janet Rountree and Nathan Rountree\n"
+//                + "Title: Learning and teaching programming: A review and discussion\n"
+//                + "Journal: Computer Science Education\n"
+//                + "Year: 2003\n"
+//                + "Volume: 13\n"
+//                + "Month: August\n"
+//                + "Note: toString test\n\n", article.toString());
+//    }
+//    
+//    @Test
+//    public void toStringProducesTheRightOutputWhenOptionalAttributesNumberPagesAndKeyAreSet() {
+//        article.setNumber("August");
+//        article.setPages("54-59");
+//        article.setKey("jingle bells");
+//                
+//        assertEquals("Authors: Anthony Robins, Janet Rountree and Nathan Rountree\n"
+//                + "Title: Learning and teaching programming: A review and discussion\n"
+//                + "Journal: Computer Science Education\n"
+//                + "Year: 2003\n"
+//                + "Volume: 13\n"
+//                + "Number: August\n"
+//                + "Pages: 54-59\n"
+//                + "Key: jingle bells\n\n", article.toString());
+//    }
