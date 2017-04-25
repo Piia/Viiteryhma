@@ -108,3 +108,11 @@ ul.references {
     
     border-bottom: 1px dashed grey;
 }
+
+.conditional .case {
+    display: none;
+}
+
+.conditional .case.selected {
+    display: block;
+}

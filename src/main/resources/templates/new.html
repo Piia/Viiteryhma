@@ -60,8 +60,16 @@
                       th:object="${book}" method="post" style="display: none;">
                     <label for="book-address">Address</label>
                     <input type="text" th:field="*{address}" id="book-address" />
-                    <label for="book-author">Author *</label>
-                    <input type="text" th:field="*{author}" id="book-author" required="required" />
+                    <div class="conditional">
+                        <div class="case selected">
+                            <label for="book-author">Author / <a href="#">Editor</a> *</label>
+                            <input type="text" th:field="*{author}" id="book-author" required="required" />
+                        </div>
+                        <div class="case">
+                            <label for="book-editor"><a href="#">Author</a> / Editor *</label>
+                            <input type="text" th:field="*{editor}" id="book-editor" />
+                        </div>
+                    </div>
                     <label for="book-edition">Edition</label>
                     <input type="text" th:field="*{edition}" id="book-edition" />
                     <label for="book-key">Key</label>
