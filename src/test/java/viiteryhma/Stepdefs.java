@@ -6,9 +6,6 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import example.bibTex.References;
-import java.io.File;
-import java.util.Scanner;
 import static org.junit.Assert.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -36,7 +33,7 @@ public class Stepdefs {
         driver.get(baseUrl + "/new");
         WebElement element = driver.findElement(By.id("reference-type"));
         Select select = new Select(element);
-        select.selectByValue(referenceType);        
+        select.selectByValue(referenceType);      
     }
     
     @When("^valid value \"([^\"]*)\" of type \"([^\"]*)\" for reference-type \"([^\"]*)\" is given$")
@@ -92,6 +89,7 @@ public class Stepdefs {
     
     @Then("^reference is added$")
     public void reference_is_added() throws Throwable {
+        //try{ Thread.sleep(120000); } catch(Exception e){}  // suoritus pysähtyy 120 sekunniksi
         assertTrue(driver.getPageSource().contains("Reference added successfully!"));
     }
     
