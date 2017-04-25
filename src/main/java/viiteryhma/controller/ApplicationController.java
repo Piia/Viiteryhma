@@ -49,11 +49,13 @@ public class ApplicationController {
         return "new";
     }
     
-    @GetMapping("/articles")
-    public String getAllArticles(Model model) {
-        model.addAttribute("articles", articleRepo.findAll());
-        return "articles";
-    }
+    
+//    Tätä ei tarvita?
+//    @GetMapping("/articles")
+//    public String getAllArticles(Model model) {
+//        model.addAttribute("articles", articleRepo.findAll());
+//        return "articles";
+//    }
     
     @GetMapping("/references")
     public String getAllReferences(Model model) {
