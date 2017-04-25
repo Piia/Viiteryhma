@@ -20,6 +20,7 @@ import viiteryhma.interfaces.Reference;
 
 @Entity
 public class Inproceedings extends AbstractPersistable<Long> implements Reference {
+    
     private final String type = "inproceedings";
     
     //required
