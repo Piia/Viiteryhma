@@ -1,7 +1,6 @@
 package viiteryhma;
 
-import viiteryhma.wanhat.MockDatabase;
-import viiteryhma.wanhat.OldArticle;
+
 import static org.hamcrest.Matchers.containsString;
 import org.junit.Before;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

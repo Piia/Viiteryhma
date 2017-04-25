@@ -5,21 +5,18 @@
  */
 package viiteryhma.References;
 
-import viiteryhma.wanhat.OldArticle;
-import java.util.Arrays;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import viiteryhma.model.Article;
 
 public class ArticleTest {
 
-    OldArticle article;
+    Article article;
 
-    public ArticleTest() {
-    }
 
     @BeforeClass
     public static void setUpClass() {
@@ -31,9 +28,12 @@ public class ArticleTest {
 
     @Before
     public void setUp() {
-        article = new OldArticle(Arrays.asList("Anthony Robins", "Janet Rountree", "Nathan Rountree"),
-                "Learning and teaching programming: A review and discussion",
-                "Computer Science Education", "2003", "13");
+        article = new Article();
+        article.setAuthor("Anthony Robins, Janet Rountree, Nathan Rountree");
+        article.setTitle("Learning and teaching programming: A review and discussion");
+        article.setJournal("Computer Science Education");
+        article.setYear("2003");
+        article.setVolume("13");
     }
 
     @After
@@ -41,13 +41,8 @@ public class ArticleTest {
     }
 
     @Test
-    public void constructorSetsTheRequiredAttributesCorrectly() {
-        String[] authors = {"Anthony Robins", "Janet Rountree", "Nathan Rountree"};
-        for(String author : authors) {
-            assertTrue(article.getAuthor().contains(author));
-        }
-        assertTrue(article.getAuthor().size() == authors.length);
-        
+    public void setMethodsTest() {
+        assertEquals("Anthony Robins, Janet Rountree, Nathan Rountree", article.getAuthor());        
         assertEquals("Learning and teaching programming: A review and discussion", article.getTitle());
         assertEquals("Computer Science Education", article.getJournal());
         assertEquals("2003", article.getYear());
