@@ -48,16 +48,16 @@ public class ArticleTest {
         assertEquals("2003", article.getYear());
         assertEquals("13", article.getVolume());
     }
-
-    @Test
-    public void constructorSetsTheOptionalAttributesToEmptyStrings() {
-        assertTrue(article.getNumber().isEmpty()
-                && article.getPages().isEmpty()
-                && article.getMonth().isEmpty()
-                && article.getNote().isEmpty()
-                && article.getKey().isEmpty());
-    }
-    
+//
+//    @Test
+//    public void constructorSetsTheOptionalAttributesToEmptyStrings() {
+//        assertTrue(article.getNumber().isEmpty()
+//                && article.getPages().isEmpty()
+//                && article.getMonth().isEmpty()
+//                && article.getNote().isEmpty()
+//                && article.getKey().isEmpty());
+//    }
+//    
     @Test
     public void settingTheOptionalAttributesNumberPagesAndKeyWorks() {
         article.setNumber("test number");
@@ -69,33 +69,33 @@ public class ArticleTest {
         assertEquals("key", article.getKey());
     }
 
-    @Test
-    public void toStringProducesTheRightOutputWhenOptionalAttributesMonthAndNoteAreSet() {
-        article.setMonth("August");
-        article.setNote("toString test");
-                
-        assertEquals("Authors: Anthony Robins, Janet Rountree and Nathan Rountree\n"
-                + "Title: Learning and teaching programming: A review and discussion\n"
-                + "Journal: Computer Science Education\n"
-                + "Year: 2003\n"
-                + "Volume: 13\n"
-                + "Month: August\n"
-                + "Note: toString test\n\n", article.toString());
-    }
-    
-    @Test
-    public void toStringProducesTheRightOutputWhenOptionalAttributesNumberPagesAndKeyAreSet() {
-        article.setNumber("August");
-        article.setPages("54-59");
-        article.setKey("jingle bells");
-                
-        assertEquals("Authors: Anthony Robins, Janet Rountree and Nathan Rountree\n"
-                + "Title: Learning and teaching programming: A review and discussion\n"
-                + "Journal: Computer Science Education\n"
-                + "Year: 2003\n"
-                + "Volume: 13\n"
-                + "Number: August\n"
-                + "Pages: 54-59\n"
-                + "Key: jingle bells\n\n", article.toString());
-    }
+//    @Test
+//    public void toStringProducesTheRightOutputWhenOptionalAttributesMonthAndNoteAreSet() {
+//        article.setMonth("August");
+//        article.setNote("toString test");
+//                
+//        assertEquals("Authors: Anthony Robins, Janet Rountree and Nathan Rountree\n"
+//                + "Title: Learning and teaching programming: A review and discussion\n"
+//                + "Journal: Computer Science Education\n"
+//                + "Year: 2003\n"
+//                + "Volume: 13\n"
+//                + "Month: August\n"
+//                + "Note: toString test\n\n", article.toString());
+//    }
+//    
+//    @Test
+//    public void toStringProducesTheRightOutputWhenOptionalAttributesNumberPagesAndKeyAreSet() {
+//        article.setNumber("August");
+//        article.setPages("54-59");
+//        article.setKey("jingle bells");
+//                
+//        assertEquals("Authors: Anthony Robins, Janet Rountree and Nathan Rountree\n"
+//                + "Title: Learning and teaching programming: A review and discussion\n"
+//                + "Journal: Computer Science Education\n"
+//                + "Year: 2003\n"
+//                + "Volume: 13\n"
+//                + "Number: August\n"
+//                + "Pages: 54-59\n"
+//                + "Key: jingle bells\n\n", article.toString());
+//    }
 }
