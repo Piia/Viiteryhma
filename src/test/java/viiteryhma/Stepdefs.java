@@ -20,7 +20,7 @@ public class Stepdefs {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
         driver = new ChromeDriver();
         baseUrl = "http://localhost:8080";
     }
