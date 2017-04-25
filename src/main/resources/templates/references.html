@@ -54,7 +54,8 @@
                             <ul>
                                 <!-- <li th:unless="*{#strings.isEmpty(author)}" th:text="'Author: ' + *{author}" />
                                      <li th:unless="*{#strings.isEmpty(editor)}" th:text="'Editor: ' + *{editor}" />                        -->
-                                <li th:text="'Author: ' + *{author}" />
+                                <li th:if="*{#strings.isEmpty(editor)}" th:text="'Author: ' + *{author}" />
+                                <li th:if="*{#strings.isEmpty(author)}" th:text="'Editor: ' + *{editor}" />
                                 <li th:text="'Publisher: ' + *{publisher}" />
                                 <li th:text="'Year: ' + *{year}" />
 
