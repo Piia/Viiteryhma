@@ -11,7 +11,7 @@ import example.bibTex.characters.StringWhitSpecialCharacters;
  *
  * @author tiera
  */
-public class ReferenceToString implements referencesToBibTex{
+public class ReferenceToString implements ReferencesToBibTex{
     private StringReference o;
     private ReferenceToRightFormat r;
     private StringWhitSpecialCharacters g;
