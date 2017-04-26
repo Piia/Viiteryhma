@@ -27,7 +27,7 @@
                 
                 <div th:if="${not #lists.isEmpty(articles)}">
                     <h3>Articles</h3>
-                    <ul class="references articles" style="list-style-type: none;" th:each="article : ${articles}" th:object="${article}">
+                    <ul class="references article" style="list-style-type: none;" th:each="article : ${articles}" th:object="${article}">
                         <li style="font-weight: bold;" th:text="*{key}" />
                         <li style="font-weight: bold;" th:text="*{title}" />
                         <li>
@@ -48,7 +48,7 @@
 
                 <div th:if="${not #lists.isEmpty(books)}">
                     <h3>Books</h3>
-                    <ul class="references books" style="list-style-type: none;" th:each="book : ${books}" th:object="${book}">
+                    <ul class="references book" style="list-style-type: none;" th:each="book : ${books}" th:object="${book}">
                         <li style="font-weight: bold;" th:text="*{key}" />
                         <li style="font-weight: bold;" th:text="*{title}" />
                         <li>
