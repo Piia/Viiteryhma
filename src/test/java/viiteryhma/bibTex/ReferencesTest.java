@@ -6,7 +6,6 @@
 package viiteryhma.bibTex;
 
 import example.bibTex.References;
-import example.bibTex.referencesToBibTex;
 import java.io.File;
 import java.io.IOException;
 import java.util.Scanner;
