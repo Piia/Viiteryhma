@@ -1,8 +1,9 @@
 package viiteryhma.controller;
 
 import example.bibTex.ReferenceToString;
-import example.bibTex.referencesToBibTex;
+import example.bibTex.ReferencesToBibTex;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import viiteryhma.model.Inproceedings;
 import viiteryhma.repositories.ArticleRepository;
 import viiteryhma.repositories.BookRepository;
 import viiteryhma.repositories.InproceedingsRepository;
+import viiteryhma.interfaces.Reference;
 
 @Controller
 public class ApplicationController {    
@@ -118,54 +120,28 @@ public class ApplicationController {
     
     protected String generateBibTex() {
         /*
-            Tämä nyt tämmöinen väliaikainen taas.
+            Tämä nyt tämmöinen hieno production ready!
         */
-        
-        List<Article> articles = articleRepo.findAll();
-        List<Book> books = bookRepo.findAll();
-        List<Inproceedings> inproceedings = inproceedingsRepo.findAll();
 
-        referencesToBibTex k = new ReferenceToString();
+        List<Reference> references = new ArrayList<Reference>();
+        references.addAll(articleRepo.findAll());
+        references.addAll(bookRepo.findAll());
+        references.addAll(inproceedingsRepo.findAll());
 
-        for (Article ref : articles) {
+        ReferencesToBibTex refWriter = new ReferenceToString();
+        for (Reference ref : references) {
             Map<String,String> fields = ref.getFields();
-            k.HederAndItsType(fields.get("key"), ref.getType());
+            refWriter.HederAndItsType(fields.get("key"), ref.getType());
 
             fields.keySet().stream().forEach((name) -> {
                 if (!name.equals("key")) {
-                  k.OneFieldAndItsType(fields.get(name), name);
+                  refWriter.OneFieldAndItsType(fields.get(name), name);
                 }
             });
 
-            k.EndReference();
+            refWriter.EndReference();
         }
 
-        for (Book ref : books) {
-            Map<String,String> fields = ref.getFields();
-            k.HederAndItsType(fields.get("key"), ref.getType());
-
-            fields.keySet().stream().forEach((name) -> {
-                if (!name.equals("key")) {
-                  k.OneFieldAndItsType(fields.get(name), name);
-                }
-            });
-
-            k.EndReference();
-        }
-
-        for (Inproceedings ref : inproceedings) {
-            Map<String,String> fields = ref.getFields();
-            k.HederAndItsType(fields.get("key"), ref.getType());
-
-            fields.keySet().stream().forEach((name) -> {
-                if (!name.equals("key")) {
-                  k.OneFieldAndItsType(fields.get(name), name);
-                }
-            });
-
-            k.EndReference();
-        }
-
-        return k.EndFile();
+        return refWriter.EndFile();
     }
 }
