@@ -20,7 +20,7 @@ public class Stepdefs {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver");
+        System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
         driver = new ChromeDriver();
         baseUrl = "http://localhost:8080";
     }
@@ -30,83 +30,20 @@ public class Stepdefs {
         driver.get(baseUrl + "/new");
         this.selectReferenceTypeForInputForm(referenceType);
     }
-
-    @Given("^there is an article in the database$")
-    public void an_article_is_in_db() throws Throwable {
-        driver.get(baseUrl + "/new");
-        this.selectReferenceTypeForInputForm("article");
-
-        this.required_article_fields_are_given("key", "author", "title", "journal", "volume", "year");
-        this.article_form_is_submitted();
-    }
-
-    @Given("^there is an article containing the text \"([^\"]*)\" in the database$")
-    public void an_article_containing_text_is_in_db(String text) throws Throwable {
-        driver.get(baseUrl + "/new");
-        this.selectReferenceTypeForInputForm("article");
-
-        this.required_article_fields_are_given("key", "author", "title " + text, "journal", "volume", "year");
-        this.article_form_is_submitted();
+    
+    @Given("^there is a reference of type \"([^\"]*)\" in the database$")
+    public void a_reference_is_in_db(String referenceType) throws Throwable {
+        this.addReference(referenceType, true, "");
     }
     
-    @Given("^there is an article not containing the text \"([^\"]*)\" in the database$")
-    public void an_article_not_containing_text_is_in_db(String text) throws Throwable {
-        driver.get(baseUrl + "/new");
-        this.selectReferenceTypeForInputForm("article");
-        
-        String stringWithoutGivenText = this.createStringNotContaining(text);
-
-        this.required_article_fields_are_given(stringWithoutGivenText, stringWithoutGivenText, stringWithoutGivenText, stringWithoutGivenText, stringWithoutGivenText, stringWithoutGivenText);
-        this.article_form_is_submitted();
+    @Given("^there is a reference of type \"([^\"]*)\" containing the text \"([^\"]*)\" in the database$")
+    public void a_reference_containing_text_is_in_db(String referenceType, String text) throws Throwable {
+        this.addReference(referenceType, true, text);
     }
 
-    @Given("^there is a book in the database$")
-    public void a_book_is_in_db() throws Throwable {
-        driver.get(baseUrl + "/new");
-        this.selectReferenceTypeForInputForm("book");
-
-        this.required_book_fields_are_given("key", "author", "title", "publisher", "year");
-        this.book_form_is_submitted();
-    }
-    
-    @Given("^there is a book containing the text \"([^\"]*)\" in the database$")
-    public void a_book_containing_text_is_in_db(String text) throws Throwable {
-        driver.get(baseUrl + "/new");
-        this.selectReferenceTypeForInputForm("book");
-
-        this.required_book_fields_are_given("key", "author", "title " + text, "publisher", "year");
-        this.book_form_is_submitted();
-    }
-
-    @Given("^there is a book not containing the text \"([^\"]*)\" in the database$")
-    public void a_book_not_containing_text_is_in_db(String text) throws Throwable {
-        driver.get(baseUrl + "/new");
-        this.selectReferenceTypeForInputForm("book");
-
-        String stringWithoutGivenText = this.createStringNotContaining(text);
-
-        this.required_book_fields_are_given(stringWithoutGivenText, stringWithoutGivenText, stringWithoutGivenText, stringWithoutGivenText, stringWithoutGivenText);
-        this.book_form_is_submitted();
-    }
-
-    @Given("^there is an inproceedings in the database$")
-    public void an_inproceedings_is_in_db() throws Throwable {
-        driver.get(baseUrl + "/new");
-        this.selectReferenceTypeForInputForm("inproceedings");
-
-        this.required_inproceedings_fields_are_given("key", "author", "title", "booktitle", "year");
-        this.inproceedings_form_is_submitted();
-    }
-    
-    @Given("^there is an inproceedings not containing the text \"([^\"]*)\" in the database$")
-    public void an_inproceedings_not_containing_text_is_in_db(String text) throws Throwable {
-        driver.get(baseUrl + "/new");
-        this.selectReferenceTypeForInputForm("inproceedings");
-        
-        String stringWithoutGivenText = this.createStringNotContaining(text);
-
-        this.required_inproceedings_fields_are_given(stringWithoutGivenText, stringWithoutGivenText, stringWithoutGivenText, stringWithoutGivenText, stringWithoutGivenText);
-        this.inproceedings_form_is_submitted();
+    @Given("^there is a reference of type \"([^\"]*)\" not containing the text \"([^\"]*)\" in the database$")
+    public void a_reference_not_containing_text_is_in_db(String referenceType, String text) throws Throwable {
+       this.addReference(referenceType, false, text);
     }
 
     @When("^list references is selected$")
@@ -153,28 +90,14 @@ public class Stepdefs {
         giveValueToField(year, "inproceedings-year");
     }
 
-    @When("^article form is submitted$")
-    public void article_form_is_submitted() throws Throwable {
-        WebElement element = driver.findElement(By.id("add-article"));
-        element.click();
+    @When("^reference form for \"([^\"]*)\" is submitted$")
+    public void reference_form_is_submitted(String referenceType) throws Throwable {
+        submitReferenceForm(referenceType);
     }
 
-    @When("^book form is submitted$")
-    public void book_form_is_submitted() throws Throwable {
-        WebElement element = driver.findElement(By.id("add-book"));
-        element.click();
-    }
-
-    @When("^inproceedings form is submitted$")
-    public void inproceedings_form_is_submitted() throws Throwable {
-        WebElement element = driver.findElement(By.id("add-inproceedings"));
-        element.click();
-    }
-
-    //shallow test..?
     @Then("^reference is added$")
     public void reference_is_added() throws Throwable {
-//        try{ Thread.sleep(30000); } catch(Exception e){}  // suoritus pysähtyy 120 sekunniksi
+//        try{ Thread.sleep(30000); } catch(Exception e){}
         assertTrue(driver.getPageSource().contains("Reference added successfully!"));
     }
 
@@ -183,42 +106,100 @@ public class Stepdefs {
         assertTrue(!driver.getPageSource().contains("Reference added successfully!"));
     }
 
-    @Then("^articles are listed$")
-    public void articles_are_listed() throws Throwable {
-        assertTrue(driver.getPageSource().contains("<h3>Articles</h3>"));        
-        assertTrue(this.thereAreVisibleArticles());   
-    }
-    
-    @Then("^articles are not listed$")
-    public void articles_are_not_listed() throws Throwable {       
-        assertTrue(!this.thereAreVisibleArticles());   
+    @Then("^references of type \"([^\"]*)\" are listed$")
+    public void references_of_type_are_listed(String referenceType) throws Throwable {
+        assertTrue(this.thereAreVisibleReferencesOfType(referenceType));
     }
 
-    @Then("^books are listed$")
-    public void books_are_listed() throws Throwable {
-        assertTrue(driver.getPageSource().contains("<h3>Books</h3>"));
-        assertTrue(this.thereAreVisibleBooks());
-    }
-
-    @Then("^books are not listed$")
-    public void books_are_not_listed() throws Throwable {
-        assertTrue(!this.thereAreVisibleBooks());
-    }
-
-    @Then("^inproceedings are listed$")
-    public void inproceedings_are_listed() throws Throwable {
-        assertTrue(driver.getPageSource().contains("<h3>Inproceedings</h3>"));
-        assertTrue(this.thereAreVisibleInproceedings());
-    }
-
-    @Then("^inproceedings are not listed$")
-    public void inproceedings_are_not_listed() throws Throwable {
-        assertTrue(!this.thereAreVisibleInproceedings());
+    @Then("^references of type \"([^\"]*)\" are not listed$")
+    public void references_of_type_are_not_listed(String referenceType) throws Throwable {
+        assertTrue(!this.thereAreVisibleReferencesOfType(referenceType));
     }
 
     @After
     public void tearDown() {
         driver.quit();
+    }
+    
+    private void addReference(String referenceType, boolean shouldContainText, String text) {
+        driver.get(baseUrl + "/new");
+        this.selectReferenceTypeForInputForm(referenceType);
+
+        switch (referenceType) {
+            case "article":
+                this.setDefaultRequiredFieldsForArticle(shouldContainText, text);
+                break;
+            case "book":
+                this.setDefaultRequiredFieldsForBook(shouldContainText, text);
+                break;
+            case "inproceedings":
+                this.setDefaultRequiredFieldsForInproceedings(shouldContainText, text);
+                break;
+            default:
+                break;
+        }
+        
+        this.submitReferenceForm(referenceType);
+    }
+
+    private void setDefaultRequiredFieldsForArticle(boolean shouldContainTheText, String text) {
+
+        if (shouldContainTheText) {
+            giveValueToField("key", "article-key");
+            giveValueToField("author", "article-author");
+            giveValueToField("title" + text, "article-title");
+            giveValueToField("journal", "article-journal");
+            giveValueToField("volume", "article-volume");
+            giveValueToField("year", "article-year");
+        } else {
+            String stringWithoutGivenText = this.createStringNotContaining(text);
+
+            giveValueToField(stringWithoutGivenText, "article-key");
+            giveValueToField(stringWithoutGivenText, "article-author");
+            giveValueToField(stringWithoutGivenText, "article-title");
+            giveValueToField(stringWithoutGivenText, "article-journal");
+            giveValueToField(stringWithoutGivenText, "article-volume");
+            giveValueToField(stringWithoutGivenText, "article-year");
+        }
+
+    }
+
+    private void setDefaultRequiredFieldsForBook(boolean shouldContainTheText, String text) {
+
+        if (shouldContainTheText) {
+            giveValueToField("key", "book-key");
+            giveValueToField("author", "book-author");
+            giveValueToField("title" + text, "book-title");
+            giveValueToField("publisher", "book-publisher");
+            giveValueToField("year", "book-year");
+        } else {
+            String stringWithoutGivenText = this.createStringNotContaining(text);
+
+            giveValueToField(stringWithoutGivenText, "book-key");
+            giveValueToField(stringWithoutGivenText, "book-author");
+            giveValueToField(stringWithoutGivenText, "book-title");
+            giveValueToField(stringWithoutGivenText, "book-publisher");
+            giveValueToField(stringWithoutGivenText, "book-year");
+        }
+    }
+
+    private void setDefaultRequiredFieldsForInproceedings(boolean shouldContainTheText, String text) {
+
+        if (shouldContainTheText) {
+            giveValueToField("key", "inproceedings-key");
+            giveValueToField("author", "inproceedings-author");
+            giveValueToField("title" + text, "inproceedings-title");
+            giveValueToField("booktitle", "inproceedings-booktitle");
+            giveValueToField("year", "inproceedings-year");
+        } else {
+            String stringWithoutGivenText = this.createStringNotContaining(text);
+
+            giveValueToField(stringWithoutGivenText, "inproceedings-key");
+            giveValueToField(stringWithoutGivenText, "inproceedings-author");
+            giveValueToField(stringWithoutGivenText, "inproceedings-title");
+            giveValueToField(stringWithoutGivenText, "inproceedings-booktitle");
+            giveValueToField(stringWithoutGivenText, "inproceedings-year");
+        }
     }
 
     private void giveValueToField(String value, String field) {
@@ -231,52 +212,27 @@ public class Stepdefs {
         Select select = new Select(element);
         select.selectByValue(referenceType);
     }
+    
+    private void submitReferenceForm(String referenceType) {
+        WebElement element = driver.findElement(By.id("add-" + referenceType));
+        element.click();
+    }
 
     private String createStringNotContaining(String text) {
         return text.equals("q") ? "a" : "q";
     }
-    
-    private boolean thereAreVisibleArticles() {
+
+    private boolean thereAreVisibleReferencesOfType(String referenceType) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        Object response = js.executeScript(this.javascriptForVisibleArticlesQuery());
+        Object response = js.executeScript(this.javascriptStringForVisibleReferencetypeQuery(referenceType));
         return response.toString().equals("true");
     }
-    
-    private boolean thereAreVisibleBooks() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        Object response = js.executeScript(this.javascriptForVisibleBooksQuery());
-        return response.toString().equals("true");
-    }
-    
-    private boolean thereAreVisibleInproceedings() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        Object response = js.executeScript(this.javascriptForVisibleInproceedingsQuery());
-        return response.toString().equals("true");
-    }
-    
-    private String javascriptForVisibleArticlesQuery() {
-        return "return (function anyArticlesVisible() {"
-                + "var articles = document.getElementsByClassName('articles');"
-                + "for(var i = 0; i < articles.length; i += 1) {"
-                + "if(articles[i].style.display != undefined && articles[i].style.display !== \"none\") {"
-                + "return true;}}"
-                + "return false;})();";
-    }
-    
-    private String javascriptForVisibleBooksQuery() {
-        return "return (function anyBooksVisible() {"
-                + "var books = document.getElementsByClassName('books');"
-                + "for(var i = 0; i < books.length; i += 1) {"
-                + "if(books[i].style.display != undefined && books[i].style.display !== \"none\") {"
-                + "return true;}}"
-                + "return false;})();";
-    }
-    
-    private String javascriptForVisibleInproceedingsQuery() {
-        return "return (function anyInproceedingsVisible() {"
-                + "var inproceedings = document.getElementsByClassName('inproceedings');"
-                + "for(var i = 0; i < inproceedings.length; i += 1) {"
-                + "if(inproceedings[i].style.display != undefined && inproceedings[i].style.display !== \"none\") {"
+
+    private String javascriptStringForVisibleReferencetypeQuery(String referenceType) {
+        return "return (function () {"
+                + "var referencesOfTheRightType = document.getElementsByClassName('" + referenceType + "');"
+                + "for(var i = 0; i < referencesOfTheRightType.length; i += 1) {"
+                + "if(referencesOfTheRightType[i].style.display !== \"none\") {"
                 + "return true;}}"
                 + "return false;})();";
     }

@@ -7,17 +7,17 @@ Feature: As a user can add an inproceedings with valid parameters
     And valid value "Enhancing apprentice-based learning of Java" of type "title" for reference-type "inproceedings" is given
     And valid value "SIGCSE '04: Proceedings of the 35th SIGCSE technical symposium on Computer science education" of type "booktitle" for reference-type "inproceedings" is given
     And valid value "2004" of type "year" for reference-type "inproceedings" is given
-    And inproceedings form is submitted
+    And reference form for "inproceedings" is submitted
     Then reference is added
 
-#  Scenario: user can not add an inproceedings without key
-#    Given add reference of type "inproceedings" is selected
-#    When valid value "Kölling, Michael and Barnes, David J." of type "author" for reference-type "inproceedings" is given
-#    And valid value "Enhancing apprentice-based learning of Java" of type "title" for reference-type "inproceedings" is given
-#    And valid value "SIGCSE '04: Proceedings of the 35th SIGCSE technical symposium on Computer science education" of type "booktitle" for reference-type "inproceedings" is given
-#    And valid value "2004" of type "year" for reference-type "inproceedings" is given
-#    And inproceedings form is submitted
-#    Then reference is not added
+  Scenario: user can not add an inproceedings without key
+    Given add reference of type "inproceedings" is selected
+    When valid value "Kölling, Michael and Barnes, David J." of type "author" for reference-type "inproceedings" is given
+    And valid value "Enhancing apprentice-based learning of Java" of type "title" for reference-type "inproceedings" is given
+    And valid value "SIGCSE '04: Proceedings of the 35th SIGCSE technical symposium on Computer science education" of type "booktitle" for reference-type "inproceedings" is given
+    And valid value "2004" of type "year" for reference-type "inproceedings" is given
+    And reference form for "inproceedings" is submitted
+    Then reference is not added
 
   Scenario: user can not add an inproceedings without author
     Given add reference of type "inproceedings" is selected
@@ -25,7 +25,7 @@ Feature: As a user can add an inproceedings with valid parameters
     And valid value "Enhancing apprentice-based learning of Java" of type "title" for reference-type "inproceedings" is given
     And valid value "SIGCSE '04: Proceedings of the 35th SIGCSE technical symposium on Computer science education" of type "booktitle" for reference-type "inproceedings" is given
     And valid value "2004" of type "year" for reference-type "inproceedings" is given
-    And inproceedings form is submitted
+    And reference form for "inproceedings" is submitted
     Then reference is not added
 
   Scenario: user can not add an inproceedings without title
@@ -34,7 +34,7 @@ Feature: As a user can add an inproceedings with valid parameters
     And valid value "Kölling, Michael and Barnes, David J." of type "author" for reference-type "inproceedings" is given
     And valid value "SIGCSE '04: Proceedings of the 35th SIGCSE technical symposium on Computer science education" of type "booktitle" for reference-type "inproceedings" is given
     And valid value "2004" of type "year" for reference-type "inproceedings" is given
-    And inproceedings form is submitted
+    And reference form for "inproceedings" is submitted
     Then reference is not added
 
   Scenario: user can not add an inproceedings without booktitle
@@ -43,7 +43,7 @@ Feature: As a user can add an inproceedings with valid parameters
     And valid value "Kölling, Michael and Barnes, David J." of type "author" for reference-type "inproceedings" is given
     And valid value "Enhancing apprentice-based learning of Java" of type "title" for reference-type "inproceedings" is given
     And valid value "2004" of type "year" for reference-type "inproceedings" is given
-    And inproceedings form is submitted
+    And reference form for "inproceedings" is submitted
     Then reference is not added
 
   Scenario: user can not add an inproceedings without year
@@ -52,7 +52,7 @@ Feature: As a user can add an inproceedings with valid parameters
     And valid value "Kölling, Michael and Barnes, David J." of type "author" for reference-type "inproceedings" is given
     And valid value "Enhancing apprentice-based learning of Java" of type "title" for reference-type "inproceedings" is given
     And valid value "SIGCSE '04: Proceedings of the 35th SIGCSE technical symposium on Computer science education" of type "booktitle" for reference-type "inproceedings" is given
-    And inproceedings form is submitted
+    And reference form for "inproceedings" is submitted
     Then reference is not added
 
 Scenario: user can add an inproceedings with values in all available fields
@@ -68,7 +68,7 @@ Scenario: user can add an inproceedings with values in all available fields
     And valid value "test organization" of type "organization" for reference-type "inproceedings" is given
     And valid value "ACM" of type "publisher" for reference-type "inproceedings" is given
     And valid value "testtext" of type "note" for reference-type "inproceedings" is given
-    And inproceedings form is submitted
+    And reference form for "inproceedings" is submitted
     Then reference is added
 
 #Required fields: author, title, booktitle, year

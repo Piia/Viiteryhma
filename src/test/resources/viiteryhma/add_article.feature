@@ -8,18 +8,18 @@ Feature: As a user can add an article with valid parameters
     And valid value "Commun. ACM" of type "journal" for reference-type "article" is given
     And valid value "29" of type "volume" for reference-type "article" is given
     And valid value "1986" of type "year" for reference-type "article" is given
-    And article form is submitted
+    And reference form for "article" is submitted
     Then reference is added
 
-#  Scenario: user can not add an article without key
-#    Given add reference of type "article" is selected
-#    When valid value "Spohrer, James C. and Soloway, Elliot" of type "author" for reference-type "article" is given
-#    And valid value "Novice mistakes: are the folk wisdoms correct?" of type "title" for reference-type "article" is given
-#    And valid value "Commun. ACM" of type "journal" for reference-type "article" is given
-#    And valid value "29" of type "volume" for reference-type "article" is given
-#    And valid value "1986" of type "year" for reference-type "article" is given
-#    And article form is submitted
-#    Then reference is not added
+  Scenario: user can not add an article without key
+    Given add reference of type "article" is selected
+    When valid value "Spohrer, James C. and Soloway, Elliot" of type "author" for reference-type "article" is given
+    And valid value "Novice mistakes: are the folk wisdoms correct?" of type "title" for reference-type "article" is given
+    And valid value "Commun. ACM" of type "journal" for reference-type "article" is given
+    And valid value "29" of type "volume" for reference-type "article" is given
+    And valid value "1986" of type "year" for reference-type "article" is given
+    And reference form for "article" is submitted
+    Then reference is not added
 
   Scenario: user can not add an article without author
     Given add reference of type "article" is selected
@@ -28,7 +28,7 @@ Feature: As a user can add an article with valid parameters
     And valid value "Commun. ACM" of type "journal" for reference-type "article" is given
     And valid value "29" of type "volume" for reference-type "article" is given
     And valid value "1986" of type "year" for reference-type "article" is given
-    And article form is submitted
+    And  reference form for "article" is submitted
     Then reference is not added
 
   Scenario: user can not add an article without title
@@ -38,7 +38,7 @@ Feature: As a user can add an article with valid parameters
     And valid value "Commun. ACM" of type "journal" for reference-type "article" is given
     And valid value "29" of type "volume" for reference-type "article" is given
     And valid value "1986" of type "year" for reference-type "article" is given
-    And article form is submitted
+    And reference form for "article" is submitted
     Then reference is not added
 
   Scenario: user can not add an article without journal
@@ -48,7 +48,7 @@ Feature: As a user can add an article with valid parameters
     And valid value "Novice mistakes: are the folk wisdoms correct?" of type "title" for reference-type "article" is given
     And valid value "29" of type "volume" for reference-type "article" is given
     And valid value "1986" of type "year" for reference-type "article" is given
-    And article form is submitted
+    And reference form for "article" is submitted
     Then reference is not added
 
   Scenario: user can not add an article without volume
@@ -58,7 +58,7 @@ Feature: As a user can add an article with valid parameters
     And valid value "Novice mistakes: are the folk wisdoms correct?" of type "title" for reference-type "article" is given
     And valid value "Commun. ACM" of type "journal" for reference-type "article" is given
     And valid value "1986" of type "year" for reference-type "article" is given
-    And article form is submitted
+    And reference form for "article" is submitted
     Then reference is not added
 
   Scenario: user can not add an article without year
@@ -68,7 +68,7 @@ Feature: As a user can add an article with valid parameters
     And valid value "Novice mistakes: are the folk wisdoms correct?" of type "title" for reference-type "article" is given
     And valid value "Commun. ACM" of type "journal" for reference-type "article" is given
     And valid value "29" of type "volume" for reference-type "article" is given
-    And article form is submitted
+    And reference form for "article" is submitted
     Then reference is not added
 
 Scenario: user can add an article with values in all available fields
@@ -78,7 +78,7 @@ Scenario: user can add an article with values in all available fields
     And valid value "624-632" of type "pages" for reference-type "article" is given
     And valid value "test month" of type "month" for reference-type "article" is given
     And valid value "test note" of type "note" for reference-type "article" is given
-    And article form is submitted
+    And reference form for "article" is submitted
     Then reference is added
 
 
