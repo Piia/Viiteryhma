@@ -1,4 +1,8 @@
 language: java
+
+addons:
+firefox: "49.0"
+
 jdk:
   - oraclejdk8
 
