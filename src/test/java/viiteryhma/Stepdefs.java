@@ -26,6 +26,8 @@ public class Stepdefs {
         File file;
         if (System.getProperty("os.name").matches("Mac OS X")) {
             file = new File("lib/macgeckodriver");
+        } else if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            file = new File("lib/geckodriver.exe");   
         } else {
             file = new File("lib/geckodriver");
         }
@@ -114,8 +116,8 @@ public class Stepdefs {
 
     @Then("^reference is added$")
     public void reference_is_added() throws Throwable {
-        //try{ Thread.sleep(30000); } catch(Exception e){}
-        assertTrue(driver.getPageSource().contains("Reference added successfully!"));
+        try{ Thread.sleep(3000); } catch(Exception e){}
+        assertTrue(driver.getPageSource().contains("added"));
     }
 
     @Then("^reference is not added$")
