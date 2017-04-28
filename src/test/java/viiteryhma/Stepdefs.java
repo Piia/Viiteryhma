@@ -5,13 +5,15 @@ import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import java.io.File;
 import static org.junit.Assert.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
+//import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 public class Stepdefs {
 
@@ -20,9 +22,24 @@ public class Stepdefs {
 
     @Before
     public void setUp() {
-        System.setProperty("webdriver.chrome.driver", "chromedriver");
-        driver = new ChromeDriver();
-        baseUrl = "http://localhost:8080";
+        
+        File file;
+        if (System.getProperty("os.name").matches("Mac OS X")) {
+            file = new File("lib/macgeckodriver");
+        } else {
+            file = new File("lib/geckodriver");
+        }
+        String absolutePath = file.getAbsolutePath();
+        System.setProperty("webdriver.gecko.driver", absolutePath);
+
+        this.driver = new FirefoxDriver();
+        //this.driver = new HtmlUnitDriver();
+        this.baseUrl = "http://localhost:8080";
+    }
+    
+    @After
+    public void tearDown() {
+        driver.quit();
     }
 
     @Given("^add reference of type \"([^\"]*)\" is selected$")
@@ -97,7 +114,7 @@ public class Stepdefs {
 
     @Then("^reference is added$")
     public void reference_is_added() throws Throwable {
-//        try{ Thread.sleep(30000); } catch(Exception e){}
+        //try{ Thread.sleep(30000); } catch(Exception e){}
         assertTrue(driver.getPageSource().contains("Reference added successfully!"));
     }
 
@@ -114,11 +131,6 @@ public class Stepdefs {
     @Then("^references of type \"([^\"]*)\" are not listed$")
     public void references_of_type_are_not_listed(String referenceType) throws Throwable {
         assertTrue(!this.thereAreVisibleReferencesOfType(referenceType));
-    }
-
-    @After
-    public void tearDown() {
-        driver.quit();
     }
     
     private void addReference(String referenceType, boolean shouldContainText, String text) {
