@@ -78,6 +78,7 @@ Scenario: user can add an article with values in all available fields
     And valid value "624-632" of type "pages" for reference-type "article" is given
     And valid value "test month" of type "month" for reference-type "article" is given
     And valid value "test note" of type "note" for reference-type "article" is given
+    And valid value "tags1,tags2,tags 3" of type "tags" for reference-type "article" is given
     And reference form for "article" is submitted
     Then reference is added
 

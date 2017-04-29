@@ -36,6 +36,8 @@ public class Book extends AbstractPersistable<Long> implements Reference {
     private String note;
     private String number;
     
+    private String tags;
+    
     public String getNumber() {
         return number;
     }
@@ -139,6 +141,14 @@ public class Book extends AbstractPersistable<Long> implements Reference {
 
     public void setEdition(String edition) {
         this.edition = edition;
+    }
+    
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
     @Override

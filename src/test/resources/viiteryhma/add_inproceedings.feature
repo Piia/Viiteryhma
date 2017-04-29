@@ -68,6 +68,7 @@ Scenario: user can add an inproceedings with values in all available fields
     And valid value "test organization" of type "organization" for reference-type "inproceedings" is given
     And valid value "ACM" of type "publisher" for reference-type "inproceedings" is given
     And valid value "testtext" of type "note" for reference-type "inproceedings" is given
+    And valid value "tags1,tags2,tags 3" of type "tags" for reference-type "inproceedings" is given
     And reference form for "inproceedings" is submitted
     Then reference is added
 

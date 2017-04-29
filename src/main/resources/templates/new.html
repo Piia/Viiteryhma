@@ -22,7 +22,7 @@
             </div>
             <div class="col-2-2">
                 <h2>Add a reference</h2>
-                <div th:if="${success}">
+                <div th:if="${success}" class="success">
                     Reference added successfully!
                 </div>
                 <em>* required fields</em>
@@ -54,6 +54,9 @@
                     <input type="text" th:field="*{volume}" id="article-volume" required="required" />
                     <label for="article-year">Year *</label>
                     <input type="text" th:field="*{year}" id="article-year" required="required" />
+                    
+                    <label for="article-tags" class="label-tags">Tags</label>
+                    <input type="text" th:field="*{tags}" id="article-tags" placeholder="tag 1,tag2,tag 3" />
                     <button type="submit" class="button" id="add-article">Add a reference</button>
                 </form>
                 <form id="references-book" action="#" th:action="@{/new/book}"
@@ -90,6 +93,9 @@
                     <input type="text" th:field="*{volume}" id="book-volume" />
                     <label for="book-year">Year *</label>
                     <input type="text" th:field="*{year}" id="book-year" required="required" />
+                    
+                    <label for="book-tags" class="label-tags">Tags</label>
+                    <input type="text" th:field="*{tags}" id="book-tags" placeholder="tag 1,tag2,tag 3" />
                     <button type="submit" class="button" id="add-book">Add a reference</button>
                 </form>
                 <form id="references-inproceedings" action="#" th:action="@{/new/inproceedings}"
@@ -122,6 +128,9 @@
                     <input type="text" th:field="*{volume}" id="inproceedings-volume" />
                     <label for="inproceedings-year">Year *</label>
                     <input type="text" th:field="*{year}" id="inproceedings-year" required="required" />
+                    
+                    <label for="inproceedings-tags" class="label-tags">Tags</label>
+                    <input type="text" th:field="*{tags}" id="inproceedings-tags" placeholder="tag 1,tag2,tag 3" />
                     <button type="submit" class="button" id="add-inproceedings">Add a reference</button>
                 </form>
             </div>
