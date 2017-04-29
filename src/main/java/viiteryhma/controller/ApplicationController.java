@@ -51,14 +51,6 @@ public class ApplicationController {
         return "new";
     }
     
-    
-//    Tätä ei tarvita?
-//    @GetMapping("/articles")
-//    public String getAllArticles(Model model) {
-//        model.addAttribute("articles", articleRepo.findAll());
-//        return "articles";
-//    }
-    
     @GetMapping("/references")
     public String getAllReferences(Model model) {
         model.addAttribute("articles", articleRepo.findAll());
@@ -123,7 +115,7 @@ public class ApplicationController {
             Tämä nyt tämmöinen hieno production ready!
         */
 
-        List<Reference> references = new ArrayList<Reference>();
+        List<Reference> references = new ArrayList<>();
         references.addAll(articleRepo.findAll());
         references.addAll(bookRepo.findAll());
         references.addAll(inproceedingsRepo.findAll());
@@ -134,7 +126,7 @@ public class ApplicationController {
             refWriter.HederAndItsType(fields.get("key"), ref.getType());
 
             fields.keySet().stream().forEach((name) -> {
-                if (!name.equals("key")) {
+                if (!name.equals("key") && fields.get(name) != null) {
                   refWriter.OneFieldAndItsType(fields.get(name), name);
                 }
             });
