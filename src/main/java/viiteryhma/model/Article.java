@@ -36,6 +36,8 @@ public class Article extends AbstractPersistable<Long> implements Reference {
     private String pages;
     private String month;
     private String note;
+    
+    private String tags;
 
     public String getNote() {
         return note;
@@ -115,6 +117,14 @@ public class Article extends AbstractPersistable<Long> implements Reference {
 
     public void setMonth(String month) {
         this.month = month;
+    }
+    
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
     
     @Override

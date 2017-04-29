@@ -37,6 +37,7 @@ public class InproceedingsTest {
         ip.setOrganization("organization");
         ip.setPublisher("publisher");
         ip.setNote("note");
+        ip.setTags("tag1,tag2,tag 3");
     }
     
     @Test
@@ -55,6 +56,7 @@ public class InproceedingsTest {
         assertEquals(ip.getOrganization(), "organization");
         assertEquals(ip.getPublisher(), "publisher");
         assertEquals(ip.getNote(), "note");
+        assertEquals(ip.getTags(), "tag1,tag2,tag 3");
         
     }
     

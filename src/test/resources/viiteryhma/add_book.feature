@@ -74,6 +74,7 @@ Scenario: user can add a book with values in all available fields
     And valid value "34" of type "edition" for reference-type "book" is given
     And valid value "5" of type "month" for reference-type "book" is given
     And valid value "testtext" of type "note" for reference-type "book" is given
+    And valid value "tags1,tags2,tags 3" of type "tags" for reference-type "book" is given
     And reference form for "book" is submitted
     Then reference is added
 
