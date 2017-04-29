@@ -48,9 +48,7 @@ public class ApplicationControllerTest {
         bookRepo.deleteAll();
         inproceedingsRepo.deleteAll();
     }
-    
 
-    
     protected Article getMockArticle() {
         Article article = new Article();
         article.setAuthor("Pekka");
@@ -58,6 +56,7 @@ public class ApplicationControllerTest {
         article.setJournal("Julkaisu");
         article.setYear("2017");
         article.setVolume("1");
+        article.setKey("aaa");
         
         return article;
     }
@@ -68,6 +67,7 @@ public class ApplicationControllerTest {
         book.setTitle("Otsikko");
         book.setPublisher("Julkaisija");
         book.setYear("2017");
+        book.setKey("aaa");
         
         return book;
     }
@@ -78,13 +78,22 @@ public class ApplicationControllerTest {
         inproceedings.setTitle("Otsikko");
         inproceedings.setBooktitle("Kirjan otsikko");
         inproceedings.setYear("2017");
+        inproceedings.setKey("aaa");
         
         return inproceedings;
+    }
+    
+    @Test
+    public void testIndexPageRedirect() throws Exception {
+        this.mockMvc
+                .perform(get("/"))
+                .andDo(print())
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/new"));
     }
 
     @Test
     public void testReturnPageNew() throws Exception {
-        //MockDatabase.reset();
         this.mockMvc
                 .perform(get("/new"))
                 .andDo(print())
@@ -182,17 +191,17 @@ public class ApplicationControllerTest {
                 .andExpect(redirectedUrl("/files/cool_references.bib"));
     }
     
- /*   @Test
+    @Test
     public void testGeneratedBibTexHasOneReferenceWhenOneAddedToDb() throws Exception {
         articleRepo.save(getMockArticle());
-        
+
         this.mockMvc
                 .perform(get("/files/references.bib"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("@article")));
     }
-    
+
     @Test
     public void testGeneratedBibTexHasMultipleReferencesWhenMultipleAddedToDb() throws Exception {
         articleRepo.save(getMockArticle());
@@ -206,5 +215,5 @@ public class ApplicationControllerTest {
                 .andExpect(content().string(containsString("@article")))
                 .andExpect(content().string(containsString("@book")))
                 .andExpect(content().string(containsString("@inproceedings")));
-    }*/
+    }
 }
