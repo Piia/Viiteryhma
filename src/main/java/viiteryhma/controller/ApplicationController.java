@@ -1,10 +1,5 @@
 package viiteryhma.controller;
 
-import example.bibTex.ReferenceToString;
-import example.bibTex.ReferencesToBibTex;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
@@ -21,7 +16,7 @@ import viiteryhma.model.Inproceedings;
 import viiteryhma.repositories.ArticleRepository;
 import viiteryhma.repositories.BookRepository;
 import viiteryhma.repositories.InproceedingsRepository;
-import viiteryhma.interfaces.Reference;
+import viiteryhma.model.BibTexGenerator;
 
 @Controller
 public class ApplicationController {    
@@ -33,6 +28,8 @@ public class ApplicationController {
     private BookRepository bookRepo;
     @Autowired
     private InproceedingsRepository inproceedingsRepo;
+    @Autowired
+    private BibTexGenerator bibTexGenerator;
     
     protected void initializeModels(Model model) {
         model.addAttribute("article", new Article());
@@ -115,33 +112,6 @@ public class ApplicationController {
     @GetMapping(value="/files/{name}.bib", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
     @ResponseBody
     public ByteArrayResource getBibTexFile() {
-        return new ByteArrayResource(this.generateBibTex().getBytes());
-    }
-    
-    protected String generateBibTex() {
-        /*
-            Tämä nyt tämmöinen hieno production ready!
-        */
-
-        List<Reference> references = new ArrayList<Reference>();
-        references.addAll(articleRepo.findAll());
-        references.addAll(bookRepo.findAll());
-        references.addAll(inproceedingsRepo.findAll());
-
-        ReferencesToBibTex refWriter = new ReferenceToString();
-        for (Reference ref : references) {
-            Map<String,String> fields = ref.getFields();
-            refWriter.HederAndItsType(fields.get("key"), ref.getType());
-
-            fields.keySet().stream().forEach((name) -> {
-                if (!name.equals("key")) {
-                  refWriter.OneFieldAndItsType(fields.get(name), name);
-                }
-            });
-
-            refWriter.EndReference();
-        }
-
-        return refWriter.EndFile();
+        return new ByteArrayResource(bibTexGenerator.generateBibTex().getBytes());
     }
 }
