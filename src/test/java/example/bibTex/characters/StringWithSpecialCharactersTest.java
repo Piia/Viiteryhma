@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author tiera
  */
-public class StringWhitSpecialCharactersTest {
+public class StringWithSpecialCharactersTest {
 
-    public StringWhitSpecialCharactersTest() {
+    public StringWithSpecialCharactersTest() {
     }
 
     @BeforeClass
@@ -48,7 +48,7 @@ public class StringWhitSpecialCharactersTest {
             texti += car(i);
         }
         String g = "ò"+"ä"+"Ä"+"ó"+"ô" +"ö"+"Ö"+"ő"+"õ"+"ç"+"ą"+"ł"+"ō"+"ȯ"+"ụ"+"å"+"Å"+"ŏ"+"š"+"ø"+"%"+"$"+"_"+">"+"|"+"–"+"¡"+"¶"+"‡"+"™"+"£"+"#"+"&"+"{"+"}"+"§"+"†"+"\\"+"<"+"—"+"®"+"¿"+"ⓐ"+"©";
-        StringWhitSpecialCharacters instance = new StringWhitSpecialCharacters();
+        StringWithSpecialCharacters instance = new StringWithSpecialCharacters();
         String expResult = instance.specialCharacters(g);
         assertEquals(texti, expResult);
     }
