@@ -11,11 +11,11 @@ import java.util.HashMap;
  *
  * @author tiera
  */
-public class StringWhitSpecialCharacters {
+public class StringWithSpecialCharacters {
 
     
 
-    public StringWhitSpecialCharacters() {
+    public StringWithSpecialCharacters() {
     }
 
     public String specialCharacters(String texti) {

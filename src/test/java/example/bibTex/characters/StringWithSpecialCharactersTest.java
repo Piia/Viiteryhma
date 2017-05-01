@@ -16,9 +16,9 @@ import static org.junit.Assert.*;
  *
  * @author tiera
  */
-public class StringWhitSpecialCharactersTest {
+public class StringWithSpecialCharactersTest {
 
-    public StringWhitSpecialCharactersTest() {
+    public StringWithSpecialCharactersTest() {
     }
 
     @BeforeClass
@@ -47,8 +47,8 @@ public class StringWhitSpecialCharactersTest {
         for (int i = 1; i <= 45; i++) {
             texti += car(i);
         }
-        String g = "ò"+"ä"+"Ä"+"ó"+"ô" +"ö"+"Ö"+"ő"+"õ"+"ç"+"ą"+"ł"+"ō"+"ȯ"+"ụ"+"å"+"Å"+"ŏ"+"š"+"ø"+"%"+"$"+"_"+">"+"|"+"–"+"¡"+"¶"+"‡"+"™"+"£"+"#"+"&"+"{"+"}"+"§"+"†"+"\\"+"<"+"—"+"®"+"¿"+"ⓐ"+"©";
-        StringWhitSpecialCharacters instance = new StringWhitSpecialCharacters();
+        String g = "ò" + "ä" + "Ä" + "ó" + "ô" + "ö" + "Ö" + "ő" + "õ" + "ç" + "ą" + "ł" + "ō" + "ȯ" + "ụ" + "å" + "Å" + "ŏ" + "š" + "ø" + "%" + "$" + "_" + ">" + "|" + "–" + "¡" + "¶" + "‡" + "™" + "£" + "#" + "&" + "{" + "}" + "§" + "†" + "\\" + "<" + "—" + "®" + "¿" + "ⓐ" + "©";
+        StringWithSpecialCharacters instance = new StringWithSpecialCharacters();
         String expResult = instance.specialCharacters(g);
         assertEquals(texti, expResult);
     }
@@ -113,9 +113,9 @@ public class StringWhitSpecialCharactersTest {
             case 19:
                 latexmuoto = "\\v{s}";
                 break;
-           // case 20:
-             //   latexmuoto = "\\t{oo}";
-              //  break;
+            // case 20:
+            //   latexmuoto = "\\t{oo}";
+            //  break;
             case 21:
                 latexmuoto = "\\o";
                 break;
