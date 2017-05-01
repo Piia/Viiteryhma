@@ -1,28 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package viiteryhma.model;
 
-import java.util.HashMap;
-import java.util.Map;
-import javax.persistence.*;
-import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.jpa.domain.AbstractPersistable;
 import viiteryhma.interfaces.Reference;
 
+import javax.persistence.Entity;
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- *
  * @author Piia Hartikka
  */
-
 @Entity
 public class Inproceedings extends AbstractPersistable<Long> implements Reference {
-    
-    private final String type = "inproceedings";
-    
+
+    private static final String type = "inproceedings";
+
     //required
     //@NotBlank ??
     private String author;
@@ -42,7 +34,7 @@ public class Inproceedings extends AbstractPersistable<Long> implements Referenc
     private String organization;
     private String publisher;
     private String note;
-    
+
     private String tags;
 
     public String getNote() {
@@ -157,7 +149,7 @@ public class Inproceedings extends AbstractPersistable<Long> implements Referenc
     public void setOrganization(String organization) {
         this.organization = organization;
     }
-    
+
     public String getTags() {
         return tags;
     }
@@ -174,7 +166,7 @@ public class Inproceedings extends AbstractPersistable<Long> implements Referenc
     @Override
     public Map<String, String> getFields() {
         Map<String, String> map = new HashMap<>();
-        
+
         map.put("address", address);
         map.put("author", author);
         map.put("booktitle", booktitle);

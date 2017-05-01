@@ -24,92 +24,94 @@ import viiteryhma.repositories.InproceedingsRepository;
 import viiteryhma.interfaces.Reference;
 
 @Controller
-public class ApplicationController {    
-    
-    
-    @Autowired
+public class ApplicationController {
+
     private ArticleRepository articleRepo;
-    @Autowired
     private BookRepository bookRepo;
-    @Autowired
     private InproceedingsRepository inproceedingsRepo;
-    
-    protected void initializeModels(Model model) {
+
+    @Autowired
+    public ApplicationController(ArticleRepository articleRepo, BookRepository bookRepo, InproceedingsRepository inproceedingsRepo) {
+        this.articleRepo = articleRepo;
+        this.bookRepo = bookRepo;
+        this.inproceedingsRepo = inproceedingsRepo;
+    }
+
+    private void initializeModels(Model model) {
         model.addAttribute("article", new Article());
         model.addAttribute("book", new Book());
         model.addAttribute("inproceedings", new Inproceedings());
     }
 
     @GetMapping("/")
-    public String app(Model model) {
+    public String app() {
         return "redirect:/new";
     }
-    
+
     @GetMapping("/new")
     public String getNewReference(Model model) {
         this.initializeModels(model);
         return "new";
     }
-    
+
     @GetMapping("/references")
     public String getAllReferences(Model model) {
         model.addAttribute("articles", articleRepo.findAll());
         model.addAttribute("books", bookRepo.findAll());
         model.addAttribute("inproceedings", inproceedingsRepo.findAll());
-        
+
         return "references";
     }
-    
+
     @PostMapping("/new/article")
     public String postNewArticle(Model model, @ModelAttribute Article article) {
         articleRepo.save(article);
         model.addAttribute("success", true);
-        
+
         this.initializeModels(model);
         return "new";
     }
-    
+
     @PostMapping("/new/book")
     public String postNewBook(Model model, @ModelAttribute Book book) {
         bookRepo.save(book);
         model.addAttribute("success", true);
-        
+
         this.initializeModels(model);
         return "new";
     }
-    
+
     @PostMapping("/new/inproceedings")
     public String postNewInproceedings(Model model, @ModelAttribute Inproceedings inproceedings) {
         inproceedingsRepo.save(inproceedings);
         model.addAttribute("success", true);
-        
+
         this.initializeModels(model);
         return "new";
     }
-    
+
     @GetMapping("/export")
-    public String getExportReferences(Model model) {
+    public String getExportReferences() {
         return "export";
     }
-    
+
     @PostMapping("/export")
-    public String postExportReferences(Model model, HttpServletRequest req) {
-        //model.addAttribute("success", true);
+    public String postExportReferences(HttpServletRequest req) {
         String name = req.getParameter("name");
-        
+
         if (name.isEmpty()) {
             name = "references";
         }
-        
+
         return "redirect:/files/" + name + ".bib";
     }
-    
+
     @GetMapping(value="/files/{name}.bib", produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
     @ResponseBody
     public ByteArrayResource getBibTexFile() {
         return new ByteArrayResource(this.generateBibTex().getBytes());
     }
-    
+
     protected String generateBibTex() {
         /*
             Tämä nyt tämmöinen hieno production ready!

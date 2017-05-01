@@ -1,199 +1,163 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package example.bibTex.characters;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
-import static org.junit.Assert.*;
-
 /**
- *
  * @author tiera
  */
-public class StringWhitSpecialCharactersTest {
+public class StringWithSpecialCharacters {
 
-    public StringWhitSpecialCharactersTest() {
+    public StringWithSpecialCharacters() {
     }
 
-    @BeforeClass
-    public static void setUpClass() {
-    }
-
-    @AfterClass
-    public static void tearDownClass() {
-    }
-
-    @Before
-    public void setUp() {
-    }
-
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of specialCharacters method, of class StringWhitSpecialCharacters.
-     */
-    @Test
-    public void testSpecialCharacters() {
-        System.out.println("specialCharacters");
-        String texti = "";
-        for (int i = 1; i <= 45; i++) {
-            texti += car(i);
+    public String specialCharacters(String texti) {
+        StringBuilder g = new StringBuilder();
+        for (int i = 0; i < texti.length(); i++) {
+            g.append(car("" + texti.charAt(i)));
         }
-        String g = "ò"+"ä"+"Ä"+"ó"+"ô" +"ö"+"Ö"+"ő"+"õ"+"ç"+"ą"+"ł"+"ō"+"ȯ"+"ụ"+"å"+"Å"+"ŏ"+"š"+"ø"+"%"+"$"+"_"+">"+"|"+"–"+"¡"+"¶"+"‡"+"™"+"£"+"#"+"&"+"{"+"}"+"§"+"†"+"\\"+"<"+"—"+"®"+"¿"+"ⓐ"+"©";
-        StringWhitSpecialCharacters instance = new StringWhitSpecialCharacters();
-        String expResult = instance.specialCharacters(g);
-        assertEquals(texti, expResult);
+        return g.toString();
     }
 
-    private String car(int a) {
-        String latexmuoto = "";
+    private String car(String a) {
+        String latexmuoto = a;
         switch (a) {
-            case 1:
+            case "ò":
                 latexmuoto = "\\`{o}";
                 break;
-            case 2:
+            case "ä":
                 latexmuoto = "\\\"a";
                 break;
-            case 3:
+            case "Ä":
                 latexmuoto = "\\\"A";
                 break;
-            case 4:
+            case "ó":
                 latexmuoto = "\\'{o}";
                 break;
-            case 5:
+            case "ô":
                 latexmuoto = "\\^{o}";
                 break;
-            case 6:
+            case "ö":
                 latexmuoto = "\\\"{o}";
                 break;
-            case 7:
+            case "Ö":
                 latexmuoto = "\\\"O";
                 break;
-            case 8:
+            case "ő":
                 latexmuoto = "\\H{o}";
                 break;
-            case 9:
+            case "õ":
                 latexmuoto = "\\~{o}";
                 break;
-            case 10:
+            case "ç":
                 latexmuoto = "\\c{c}";
                 break;
-            case 11:
+            case "ą":
                 latexmuoto = "\\k{a}";
                 break;
-            case 12:
+            case "ł":
                 latexmuoto = "\\l{}";
                 break;
-            case 13:
+            case "ō":
                 latexmuoto = "\\={o}";
                 break;
-            case 14:
+            case "ȯ":
                 latexmuoto = "\\.{o}";
                 break;
-            case 15:
+            case "ụ":
                 latexmuoto = "\\d{u}";
                 break;
-            case 16:
+            case "å":
                 latexmuoto = "\\r{a}";
                 break;
-            case 17:
+            case "Å":
                 latexmuoto = "\\AA";
                 break;
-            case 18:
+            case "ŏ":
                 latexmuoto = "\\u{o}";
                 break;
-            case 19:
+            case "š":
                 latexmuoto = "\\v{s}";
                 break;
-           // case 20:
-             //   latexmuoto = "\\t{oo}";
-              //  break;
-            case 21:
+            //case "o͡o":
+            //  latexmuoto = "\\t{oo}";
+            //  break;
+            case "ø":
                 latexmuoto = "\\o";
                 break;
-            case 22:
+            case "%":
                 latexmuoto = "\\%";
                 break;
-            case 23:
+            case "$":
                 latexmuoto = "\\$";
                 break;
-            case 24:
+            case "_":
                 latexmuoto = "\\_";
                 break;
-            case 25:
+            case ">":
                 latexmuoto = "\\textgreater";
                 break;
-            case 26:
+            case "|":
                 latexmuoto = "\\textbar";
                 break;
-            case 27:
+            case "–":
                 latexmuoto = "\\textendash";
                 break;
-            case 28:
+            case "¡":
                 latexmuoto = "\\textexclamdown";
                 break;
-            case 29:
+            case "¶":
                 latexmuoto = "\\P";
                 break;
-            case 30:
+            case "‡":
                 latexmuoto = "\\ddag";
                 break;
-            case 31:
+            case "™":
                 latexmuoto = "\\texttrademark";
                 break;
-            case 32:
+            case "£":
                 latexmuoto = "\\pounds";
                 break;
-            case 33:
+            case "#":
                 latexmuoto = "\\#";
                 break;
-            case 34:
+            case "&":
                 latexmuoto = "\\&";
                 break;
-            case 35:
+            case "{":
                 latexmuoto = "\\{";
                 break;
-            case 36:
+            case "}":
                 latexmuoto = "\\}";
                 break;
-            case 37:
+            case "§":
                 latexmuoto = "\\S";
                 break;
-            case 38:
+            case "†":
                 latexmuoto = "\\dag";
                 break;
-            case 39:
+            case "\\":
                 latexmuoto = "\\textbackslash";
                 break;
-            case 40:
+            case "<":
                 latexmuoto = "\\textless";
                 break;
-            case 41:
+            case "—":
                 latexmuoto = "\\textemdash";
                 break;
-            case 42:
+            case "®":
                 latexmuoto = "\\textregistered";
                 break;
-            case 43:
+            case "¿":
                 latexmuoto = "\\textquestiondown";
                 break;
-            case 44:
+            case "ⓐ":
                 latexmuoto = "\\textcircled{a}";
                 break;
-            case 45:
+            case "©":
                 latexmuoto = "\\copyright";
                 break;
-
         }
+
+        //\textsuperscript{a}
+        //k.put("o", "\\b{o}"); en löydä
         return latexmuoto;
     }
-
 }
