@@ -1,6 +1,6 @@
 package example.bibTex;
 
-import example.bibTex.characters.StringWhitSpecialCharacters;
+import example.bibTex.characters.StringWithSpecialCharacters;
 
 /**
  * @author tiera
@@ -8,12 +8,12 @@ import example.bibTex.characters.StringWhitSpecialCharacters;
 public class ReferenceToString implements ReferencesToBibTex {
     private StringReference o;
     private ReferenceToRightFormat r;
-    private StringWhitSpecialCharacters g;
+    private StringWithSpecialCharacters g;
 
     public ReferenceToString() { //alustaa referaatin
         this.o = new StringReference();
         this.r = new ReferenceToRightFormat();
-        this.g = new StringWhitSpecialCharacters();
+        this.g = new StringWithSpecialCharacters();
     }
 
     @Override

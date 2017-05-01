@@ -9,15 +9,11 @@ import java.io.IOException;
  */
 public class References {
 
-    private File file;
-    private FileWriter filewriter;
     private WriteReference o;
     private ReferenceToRightFormat r;
 
     public References(File file) throws IOException { //alustaa referaatin
-        this.file = file;
-        this.filewriter = new FileWriter(file, true);
-        this.o = new WriteReference(filewriter);
+        this.o = new WriteReference(new FileWriter(file, true));
         this.r = new ReferenceToRightFormat();
     }
 

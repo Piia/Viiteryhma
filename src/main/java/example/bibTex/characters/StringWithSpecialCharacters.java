@@ -1,29 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package example.bibTex.characters;
 
-import java.util.HashMap;
-
 /**
- *
  * @author tiera
  */
-public class StringWhitSpecialCharacters {
+public class StringWithSpecialCharacters {
 
-    
-
-    public StringWhitSpecialCharacters() {
+    public StringWithSpecialCharacters() {
     }
 
     public String specialCharacters(String texti) {
-        String g = "";
+        StringBuilder g = new StringBuilder();
         for (int i = 0; i < texti.length(); i++) {
-            g += car("" + texti.charAt(i));
+            g.append(car("" + texti.charAt(i)));
         }
-        return g;
+        return g.toString();
     }
 
     private String car(String a) {
@@ -87,8 +77,8 @@ public class StringWhitSpecialCharacters {
                 latexmuoto = "\\v{s}";
                 break;
             //case "o͡o":
-              //  latexmuoto = "\\t{oo}";
-              //  break;
+            //  latexmuoto = "\\t{oo}";
+            //  break;
             case "ø":
                 latexmuoto = "\\o";
                 break;
@@ -164,8 +154,8 @@ public class StringWhitSpecialCharacters {
             case "©":
                 latexmuoto = "\\copyright";
                 break;
-
         }
+
         //\textsuperscript{a}
         //k.put("o", "\\b{o}"); en löydä
         return latexmuoto;
