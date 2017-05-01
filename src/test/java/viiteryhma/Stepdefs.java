@@ -22,10 +22,12 @@ public class Stepdefs {
 
     @Before
     public void setUp() {
-        
+
         File file;
         if (System.getProperty("os.name").matches("Mac OS X")) {
             file = new File("lib/macgeckodriver");
+        } else if (System.getProperty("os.name").matches("Windows 10")) {
+            file = new File("lib/geckodriver.exe");
         } else {
             file = new File("lib/geckodriver");
         }
@@ -36,7 +38,7 @@ public class Stepdefs {
         //this.driver = new HtmlUnitDriver();
         this.baseUrl = "http://localhost:8080";
     }
-    
+
     @After
     public void tearDown() {
         driver.quit();
@@ -47,12 +49,12 @@ public class Stepdefs {
         driver.get(baseUrl + "/new");
         this.selectReferenceTypeForInputForm(referenceType);
     }
-    
+
     @Given("^there is a reference of type \"([^\"]*)\" in the database$")
     public void a_reference_is_in_db(String referenceType) throws Throwable {
         this.addReference(referenceType, true, "");
     }
-    
+
     @Given("^there is a reference of type \"([^\"]*)\" containing the text \"([^\"]*)\" in the database$")
     public void a_reference_containing_text_is_in_db(String referenceType, String text) throws Throwable {
         this.addReference(referenceType, true, text);
@@ -60,7 +62,7 @@ public class Stepdefs {
 
     @Given("^there is a reference of type \"([^\"]*)\" not containing the text \"([^\"]*)\" in the database$")
     public void a_reference_not_containing_text_is_in_db(String referenceType, String text) throws Throwable {
-       this.addReference(referenceType, false, text);
+        this.addReference(referenceType, false, text);
     }
 
     @When("^list references is selected$")
@@ -114,7 +116,7 @@ public class Stepdefs {
 
     @Then("^reference is added$")
     public void reference_is_added() throws Throwable {
-        //try{ Thread.sleep(30000); } catch(Exception e){}
+        try{ Thread.sleep(30000); } catch(Exception e){}
         assertTrue(driver.getPageSource().contains("Reference added successfully!"));
     }
 
@@ -132,7 +134,7 @@ public class Stepdefs {
     public void references_of_type_are_not_listed(String referenceType) throws Throwable {
         assertTrue(!this.thereAreVisibleReferencesOfType(referenceType));
     }
-    
+
     private void addReference(String referenceType, boolean shouldContainText, String text) {
         driver.get(baseUrl + "/new");
         this.selectReferenceTypeForInputForm(referenceType);
@@ -150,7 +152,7 @@ public class Stepdefs {
             default:
                 break;
         }
-        
+
         this.submitReferenceForm(referenceType);
     }
 
@@ -224,7 +226,7 @@ public class Stepdefs {
         Select select = new Select(element);
         select.selectByValue(referenceType);
     }
-    
+
     private void submitReferenceForm(String referenceType) {
         WebElement element = driver.findElement(By.id("add-" + referenceType));
         element.click();
