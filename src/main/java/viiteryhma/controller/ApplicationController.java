@@ -25,16 +25,19 @@ import viiteryhma.interfaces.Reference;
 
 @Controller
 public class ApplicationController {    
-    
-    
-    @Autowired
+
     private ArticleRepository articleRepo;
-    @Autowired
     private BookRepository bookRepo;
-    @Autowired
     private InproceedingsRepository inproceedingsRepo;
-    
-    protected void initializeModels(Model model) {
+
+    @Autowired
+    public ApplicationController(ArticleRepository articleRepo, BookRepository bookRepo, InproceedingsRepository inproceedingsRepo) {
+        this.articleRepo = articleRepo;
+        this.bookRepo = bookRepo;
+        this.inproceedingsRepo = inproceedingsRepo;
+    }
+
+    private void initializeModels(Model model) {
         model.addAttribute("article", new Article());
         model.addAttribute("book", new Book());
         model.addAttribute("inproceedings", new Inproceedings());
