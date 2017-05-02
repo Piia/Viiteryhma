@@ -7,7 +7,7 @@ Feature: As a user can add a book with valid parameters
     And valid value "Mind in Society: The Development of Higher Psychological Processes" of type "title" for reference-type "book" is given
     And valid value "Harvard University Press" of type "publisher" for reference-type "book" is given
     And valid value "1978" of type "year" for reference-type "book" is given
-    And book form is submitted
+    And reference form for "book" is submitted
     Then reference is added
 
 #  Scenario: user can add a book with valid parameters using editor
@@ -20,14 +20,14 @@ Feature: As a user can add a book with valid parameters
 #    And book form is submitted
 #    Then reference is added
 
-#  Scenario: user can not add a book without key
-#    Given add reference of type "book" is selected
-#    When valid value "L. S. Vygotsky" of type "author" for reference-type "book" is given
-#    And valid value "Mind in Society: The Development of Higher Psychological Processes" of type "title" for reference-type "book" is given
-#    And valid value "Harvard University Press" of type "publisher" for reference-type "book" is given
-#    And valid value "1978" of type "year" for reference-type "book" is given
-#    And book form is submitted
-#    Then reference is not added
+  Scenario: user can not add a book without key
+    Given add reference of type "book" is selected
+    When valid value "L. S. Vygotsky" of type "author" for reference-type "book" is given
+    And valid value "Mind in Society: The Development of Higher Psychological Processes" of type "title" for reference-type "book" is given
+    And valid value "Harvard University Press" of type "publisher" for reference-type "book" is given
+    And valid value "1978" of type "year" for reference-type "book" is given
+    And reference form for "book" is submitted
+    Then reference is not added
 
   Scenario: user can not add a book without author and editor
     Given add reference of type "book" is selected
@@ -35,7 +35,7 @@ Feature: As a user can add a book with valid parameters
     And valid value "Mind in Society: The Development of Higher Psychological Processes" of type "title" for reference-type "book" is given
     And valid value "Harvard University Press" of type "publisher" for reference-type "book" is given
     And valid value "1978" of type "year" for reference-type "book" is given
-    And book form is submitted
+    And reference form for "book" is submitted
     Then reference is not added
 
   Scenario: user can not add a book without title
@@ -44,7 +44,7 @@ Feature: As a user can add a book with valid parameters
     And valid value "L. S. Vygotsky" of type "author" for reference-type "book" is given
     And valid value "Harvard University Press" of type "publisher" for reference-type "book" is given
     And valid value "1978" of type "year" for reference-type "book" is given
-    And book form is submitted
+    And reference form for "book" is submitted
     Then reference is not added
 
   Scenario: user can not add a book without publisher
@@ -53,7 +53,7 @@ Feature: As a user can add a book with valid parameters
     And valid value "L. S. Vygotsky" of type "author" for reference-type "book" is given
     And valid value "Mind in Society: The Development of Higher Psychological Processes" of type "title" for reference-type "book" is given
     And valid value "1978" of type "year" for reference-type "book" is given
-    And book form is submitted
+    And reference form for "book" is submitted
     Then reference is not added
 
   Scenario: user can not add a book without year
@@ -62,7 +62,7 @@ Feature: As a user can add a book with valid parameters
     And valid value "L. S. Vygotsky" of type "author" for reference-type "book" is given
     And valid value "Mind in Society: The Development of Higher Psychological Processes" of type "title" for reference-type "book" is given
     And valid value "Harvard University Press" of type "publisher" for reference-type "book" is given
-    And book form is submitted
+    And reference form for "book" is submitted
     Then reference is not added
 
 Scenario: user can add a book with values in all available fields
@@ -74,7 +74,8 @@ Scenario: user can add a book with values in all available fields
     And valid value "34" of type "edition" for reference-type "book" is given
     And valid value "5" of type "month" for reference-type "book" is given
     And valid value "testtext" of type "note" for reference-type "book" is given
-    And book form is submitted
+    And valid value "tags1,tags2,tags 3" of type "tags" for reference-type "book" is given
+    And reference form for "book" is submitted
     Then reference is added
 
 #Required fields: author/editor, title, publisher, year
