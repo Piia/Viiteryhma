@@ -35,7 +35,7 @@ public class BookTest {
         book.setPublisher("publisher");
         book.setNote("note");
         book.setNumber("number");
-        
+        book.setTags("tag1,tag2,tag 3");
     }
     
     @Test
@@ -52,7 +52,7 @@ public class BookTest {
         assertEquals(book.getMonth(), "month");
         assertEquals(book.getPublisher(), "publisher");
         assertEquals(book.getNote(), "note");
-        
+        assertEquals(book.getTags(), "tag1,tag2,tag 3");
     }
     
     @Test

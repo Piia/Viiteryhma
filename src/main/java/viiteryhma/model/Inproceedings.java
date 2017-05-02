@@ -42,6 +42,8 @@ public class Inproceedings extends AbstractPersistable<Long> implements Referenc
     private String organization;
     private String publisher;
     private String note;
+    
+    private String tags;
 
     public String getNote() {
         return note;
@@ -154,6 +156,14 @@ public class Inproceedings extends AbstractPersistable<Long> implements Referenc
 
     public void setOrganization(String organization) {
         this.organization = organization;
+    }
+    
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
     @Override

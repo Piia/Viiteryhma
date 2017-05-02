@@ -20,6 +20,7 @@ public class Book extends AbstractPersistable<Long> implements Reference {
     //required
     //@NotBlank ??
     private String author;
+    private String editor;
     private String title;
     private String publisher;
     private String year;
@@ -34,6 +35,8 @@ public class Book extends AbstractPersistable<Long> implements Reference {
     private String month;
     private String note;
     private String number;
+    
+    private String tags;
     
     public String getNumber() {
         return number;
@@ -57,6 +60,14 @@ public class Book extends AbstractPersistable<Long> implements Reference {
 
     public void setKey(String key) {
         this.key = key;
+    }
+    
+    public String getEditor() {
+        return editor;
+    }
+
+    public void setEditor(String editor) {
+        this.editor = editor;
     }
 
     public String getAuthor() {
@@ -131,6 +142,14 @@ public class Book extends AbstractPersistable<Long> implements Reference {
     public void setEdition(String edition) {
         this.edition = edition;
     }
+    
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
 
     @Override
     public String getType() {
@@ -143,6 +162,7 @@ public class Book extends AbstractPersistable<Long> implements Reference {
         
         map.put("address", address);
         map.put("author", author);
+        map.put("editor", editor);
         map.put("edition", edition);
         map.put("key", key);
         map.put("month", month);

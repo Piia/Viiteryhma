@@ -32,7 +32,7 @@ public class ArticleTest {
         article.setMonth("month");
         article.setNote("note");
         article.setNumber("number");
-        
+        article.setTags("tag1,tag2,tag 3");
     }
     
     @Test
@@ -45,7 +45,7 @@ public class ArticleTest {
         assertEquals(article.getNumber(), "number");
         assertEquals(article.getMonth(), "month");
         assertEquals(article.getNote(), "note");
-        assertEquals(article.getJournal(), "journal");
+        assertEquals(article.getTags(), "tag1,tag2,tag 3");
     }
     
     @Test
@@ -65,7 +65,6 @@ public class ArticleTest {
         assertEquals(fields.get("month"), "month");
         assertEquals(fields.get("note"), "note");
         assertEquals(fields.get("journal"), "journal");
-        
     }
 
 }
