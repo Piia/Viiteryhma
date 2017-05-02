@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package viiteryhma.model;
 
 import java.util.HashMap;
@@ -14,20 +13,24 @@ import org.springframework.data.jpa.domain.AbstractPersistable;
 import viiteryhma.interfaces.Reference;
 
 @Entity
-public class Book extends AbstractPersistable<Long> implements Reference {
+public class Book extends AbstractPersistable<Integer> implements Reference {
+
     private final String type = "book";
-    
+
     //required
     //@NotBlank ??
+    @Id
+    @GeneratedValue
+    private Integer id;
+    
+    private String key;
     private String author;
     private String editor;
     private String title;
     private String publisher;
     private String year;
 
-
     //optional:
-    private String key;
     private String volume;
     private String series;
     private String address;
@@ -35,8 +38,13 @@ public class Book extends AbstractPersistable<Long> implements Reference {
     private String month;
     private String note;
     private String number;
-    
+
     private String tags;
+
+    @Override
+    public Integer getId() {
+        return id;
+    }
     
     public String getNumber() {
         return number;
@@ -61,7 +69,7 @@ public class Book extends AbstractPersistable<Long> implements Reference {
     public void setKey(String key) {
         this.key = key;
     }
-    
+
     public String getEditor() {
         return editor;
     }
@@ -102,7 +110,6 @@ public class Book extends AbstractPersistable<Long> implements Reference {
         this.volume = volume;
     }
 
-
     public String getMonth() {
         return month;
     }
@@ -142,7 +149,7 @@ public class Book extends AbstractPersistable<Long> implements Reference {
     public void setEdition(String edition) {
         this.edition = edition;
     }
-    
+
     public String getTags() {
         return tags;
     }
@@ -159,7 +166,7 @@ public class Book extends AbstractPersistable<Long> implements Reference {
     @Override
     public Map<String, String> getFields() {
         Map<String, String> map = new HashMap<>();
-        
+
         map.put("address", address);
         map.put("author", author);
         map.put("editor", editor);
@@ -176,6 +183,5 @@ public class Book extends AbstractPersistable<Long> implements Reference {
 
         return map;
     }
-
 
 }

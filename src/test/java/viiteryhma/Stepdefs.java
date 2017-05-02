@@ -7,6 +7,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import java.io.File;
 import static org.junit.Assert.*;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +23,7 @@ public class Stepdefs {
 
     @Before
     public void setUp() {
-        
+
         File file;
         if (System.getProperty("os.name").matches("Mac OS X")) {
             file = new File("lib/macgeckodriver");
@@ -38,10 +39,15 @@ public class Stepdefs {
         //this.driver = new HtmlUnitDriver();
         this.baseUrl = "http://localhost:8080";
     }
-    
+
     @After
     public void tearDown() {
         driver.quit();
+    }
+    
+    @Given("^database is cleared$")
+    public void clear_database() {
+        driver.get(baseUrl + "/delete/all");
     }
 
     @Given("^add reference of type \"([^\"]*)\" is selected$")
@@ -49,12 +55,12 @@ public class Stepdefs {
         driver.get(baseUrl + "/new");
         this.selectReferenceTypeForInputForm(referenceType);
     }
-    
+
     @Given("^there is a reference of type \"([^\"]*)\" in the database$")
     public void a_reference_is_in_db(String referenceType) throws Throwable {
         this.addReference(referenceType, true, "");
     }
-    
+
     @Given("^there is a reference of type \"([^\"]*)\" containing the text \"([^\"]*)\" in the database$")
     public void a_reference_containing_text_is_in_db(String referenceType, String text) throws Throwable {
         this.addReference(referenceType, true, text);
@@ -62,7 +68,7 @@ public class Stepdefs {
 
     @Given("^there is a reference of type \"([^\"]*)\" not containing the text \"([^\"]*)\" in the database$")
     public void a_reference_not_containing_text_is_in_db(String referenceType, String text) throws Throwable {
-       this.addReference(referenceType, false, text);
+        this.addReference(referenceType, false, text);
     }
 
     @When("^list references is selected$")
@@ -113,6 +119,16 @@ public class Stepdefs {
     public void reference_form_is_submitted(String referenceType) throws Throwable {
         submitReferenceForm(referenceType);
     }
+    
+    @When("^delete button for reference of type \"([^\"]*)\" is clicked$")
+    public void delete_button_clicked(String referenceType) throws Throwable {
+        WebElement element = driver.findElement(By.id("delete-" + referenceType));
+        element.click();
+        
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+        try{ Thread.sleep(3000); } catch(Exception e){}
+    }
 
     @Then("^reference is added$")
     public void reference_is_added() throws Throwable {
@@ -134,7 +150,7 @@ public class Stepdefs {
     public void references_of_type_are_not_listed(String referenceType) throws Throwable {
         assertTrue(!this.thereAreVisibleReferencesOfType(referenceType));
     }
-    
+
     private void addReference(String referenceType, boolean shouldContainText, String text) {
         driver.get(baseUrl + "/new");
         this.selectReferenceTypeForInputForm(referenceType);
@@ -152,7 +168,7 @@ public class Stepdefs {
             default:
                 break;
         }
-        
+
         this.submitReferenceForm(referenceType);
     }
 
@@ -226,7 +242,7 @@ public class Stepdefs {
         Select select = new Select(element);
         select.selectByValue(referenceType);
     }
-    
+
     private void submitReferenceForm(String referenceType) {
         WebElement element = driver.findElement(By.id("add-" + referenceType));
         element.click();

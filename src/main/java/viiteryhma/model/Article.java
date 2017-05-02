@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package viiteryhma.model;
 
 import java.util.HashMap;
@@ -16,29 +15,38 @@ import viiteryhma.interfaces.Reference;
  *
  * @author Piia Hartikka
  */
-
 @Entity
-public class Article extends AbstractPersistable<Long> implements Reference {
+public class Article extends AbstractPersistable<Integer> implements Reference {
+
     private final String type = "article";
-    
+
     //required
     //@NotBlank
+    @Id
+    @GeneratedValue
+    private Integer id;
+
+    private String key;
     private String author;
     private String title;
     private String journal;
     private String year;
     private String volume;
 
-
     //optional:
-    private String key;
     private String number;
     private String pages;
     private String month;
     private String note;
-    
-    private String tags;
 
+    private String tags;
+    
+    
+    @Override
+    public Integer getId() {
+        return id;
+    }
+    
     public String getNote() {
         return note;
     }
@@ -118,7 +126,7 @@ public class Article extends AbstractPersistable<Long> implements Reference {
     public void setMonth(String month) {
         this.month = month;
     }
-    
+
     public String getTags() {
         return tags;
     }
@@ -126,7 +134,7 @@ public class Article extends AbstractPersistable<Long> implements Reference {
     public void setTags(String tags) {
         this.tags = tags;
     }
-    
+
     @Override
     public String getType() {
         return type;
@@ -135,7 +143,7 @@ public class Article extends AbstractPersistable<Long> implements Reference {
     @Override
     public Map<String, String> getFields() {
         Map<String, String> map = new HashMap<>();
-    
+
         map.put("author", author);
         map.put("journal", journal);
         map.put("key", key);

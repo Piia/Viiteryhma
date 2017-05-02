@@ -19,12 +19,17 @@ import viiteryhma.interfaces.Reference;
  */
 
 @Entity
-public class Inproceedings extends AbstractPersistable<Long> implements Reference {
+public class Inproceedings extends AbstractPersistable<Integer> implements Reference {
     
     private final String type = "inproceedings";
     
     //required
     //@NotBlank ??
+    @Id
+    @GeneratedValue
+    private Integer id;
+    
+    private String key;
     private String author;
     private String title;
     private String booktitle;
@@ -32,7 +37,6 @@ public class Inproceedings extends AbstractPersistable<Long> implements Referenc
 
 
     //optional:
-    private String key;
     private String editor;
     private String volume;
     private String series;
@@ -45,6 +49,11 @@ public class Inproceedings extends AbstractPersistable<Long> implements Referenc
     
     private String tags;
 
+    @Override
+    public Integer getId() {
+        return id;
+    }
+    
     public String getNote() {
         return note;
     }

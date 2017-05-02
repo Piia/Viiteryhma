@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import viiteryhma.model.Inproceedings;
  
 @Repository
-public interface InproceedingsRepository extends JpaRepository<Inproceedings, Long> {
+public interface InproceedingsRepository extends JpaRepository<Inproceedings, Integer> {
 
  
 }

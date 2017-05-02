@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import viiteryhma.model.Article;
@@ -85,6 +86,33 @@ public class ApplicationController {
         
         this.initializeModels(model);
         return "new";
+    }
+    
+    @GetMapping("/delete/article/{id}")
+    public String deleteArticle(Model model, @PathVariable String id) {
+        articleRepo.delete(Integer.parseInt(id));        
+        return "redirect:/references";
+    }
+    
+    @GetMapping("/delete/book/{id}")
+    public String deleteBook(Model model, @PathVariable String id) {
+        bookRepo.delete(Integer.parseInt(id));        
+        return "redirect:/references";
+    }
+    
+    @GetMapping("/delete/inproceedings/{id}")
+    public String deleteInproceedings(Model model, @PathVariable String id) {
+        inproceedingsRepo.delete(Integer.parseInt(id));        
+        return "redirect:/references";
+    }
+    
+    @GetMapping("/delete/all")
+    public String deleteAll(Model model) {
+        articleRepo.deleteAll();
+        bookRepo.deleteAll();
+        inproceedingsRepo.deleteAll();
+        
+        return "redirect:/references";
     }
     
     @GetMapping("/export")

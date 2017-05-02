@@ -101,6 +101,11 @@ select {
     cursor: pointer;
 }
 
+button.delete {
+    background-color: red;
+    border: 1px solid maroon;
+}
+
 form button {
     margin-top: 10px;
 }
