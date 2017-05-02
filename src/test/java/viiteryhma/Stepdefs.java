@@ -45,13 +45,13 @@ public class Stepdefs {
         driver.quit();
     }
     
-    @Given("^export is selected$")
+  /*  @Given("^export is selected$")
     public void export_is_selected() {
         driver.get(baseUrl + "/new");
         WebElement element = driver.findElement(By.linkText("Export references"));
         element.click();
     }
-    
+    */
     @Given("^database is cleared$")
     public void clear_database() {
         driver.get(baseUrl + "/delete/all");
@@ -83,13 +83,13 @@ public class Stepdefs {
         driver.get(baseUrl + "/references");
     }
     
-    @When("^write name of file \"([^\"]*)\"$")
+   /* @When("^write name of file \"([^\"]*)\"$")
     public void write_name_of_file(String g) throws Throwable {
         WebElement element = driver.findElement(By.name("name"));
         element.sendKeys(g);
         try{ Thread.sleep(3000); } catch(Exception e){}
     }
-
+*/
     @When("^references are filtered using \"([^\"]*)\"$")
     public void filter_references(String filterText) throws Throwable {
         WebElement element = driver.findElement(By.id("filter"));
@@ -165,11 +165,11 @@ public class Stepdefs {
         assertTrue(!this.thereAreVisibleReferencesOfType(referenceType));
     }
  
-    @Then("^user receives a bibtex file \"([^\"]*)\"$")
+   /* @Then("^user receives a bibtex file \"([^\"]*)\"$")
     public void user_receives_a_bibtex_file(String referenceType) throws Throwable {
         WebElement element = driver.findElement(By.className("button"));
         element.click();
-    }    
+    }*/    
 
     private void addReference(String referenceType, boolean shouldContainText, String text) {
         driver.get(baseUrl + "/new"); 
