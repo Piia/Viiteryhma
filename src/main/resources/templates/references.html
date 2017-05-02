@@ -24,7 +24,7 @@
             <div class="col-2-2">
                 <label for="filter">Filter references:</label>
                 <input type="text" id="filter" placeholder="Filter" />
-                
+
                 <div th:if="${not #lists.isEmpty(articles)}">
                     <h3>Articles</h3>
                     <ul class="references article" style="list-style-type: none;" th:each="article : ${articles}" th:object="${article}">
@@ -41,7 +41,14 @@
                                 <li th:unless="*{#strings.isEmpty(number)}" th:text="'Number: ' + *{number}" />
                                 <li th:unless="*{#strings.isEmpty(pages)}" th:text="'Pages: ' + *{pages}" />
                                 <li th:unless="*{#strings.isEmpty(volume)}" th:text="'Volume:  ' + *{volume}" />
+
+                                <li th:unless="*{#strings.isEmpty(tags)}" th:text="'Tags:  ' + *{tags}" />
                             </ul>
+                        </li>
+                        <li>
+                            <form th:action="@{/delete/article/{id}(id=*{id})}" method="get">
+                                <button type="submit" id="delete-article" onclick="return confirm('Are you sure?');">Delete</button>
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -53,8 +60,6 @@
                         <li style="font-weight: bold;" th:text="*{title}" />
                         <li>
                             <ul>
-                                <!-- <li th:unless="*{#strings.isEmpty(author)}" th:text="'Author: ' + *{author}" />
-                                     <li th:unless="*{#strings.isEmpty(editor)}" th:text="'Editor: ' + *{editor}" />                        -->
                                 <li th:if="*{#strings.isEmpty(editor)}" th:text="'Author: ' + *{author}" />
                                 <li th:if="*{#strings.isEmpty(author)}" th:text="'Editor: ' + *{editor}" />
                                 <li th:text="'Publisher: ' + *{publisher}" />
@@ -67,7 +72,14 @@
                                 <li th:unless="*{#strings.isEmpty(volume)}" th:text="'Volume:  ' + *{volume}" />
                                 <li th:unless="*{#strings.isEmpty(series)}" th:text="'Series: ' + *{series}" />
                                 <li th:unless="*{#strings.isEmpty(address)}" th:text="'Address: ' + *{address}" />
+
+                                <li th:unless="*{#strings.isEmpty(tags)}" th:text="'Tags:  ' + *{tags}" />
                             </ul>
+                        </li>
+                        <li>
+                            <form th:action="@{/delete/book/{id}(id=*{id})}" method="get">
+                                <button type="submit" id="delete-book" onclick="return confirm('Are you sure?');">Delete</button>
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -93,7 +105,14 @@
                                 <li th:unless="*{#strings.isEmpty(volume)}" th:text="'Volume:  ' + *{volume}" />
                                 <li th:unless="*{#strings.isEmpty(series)}" th:text="'Series: ' + *{series}" />
                                 <li th:unless="*{#strings.isEmpty(address)}" th:text="'Address: ' + *{address}" />
+
+                                <li th:unless="*{#strings.isEmpty(tags)}" th:text="'Tags:  ' + *{tags}" />
                             </ul>
+                        </li>
+                        <li>
+                            <form th:action="@{/delete/inproceedings/{id}(id=*{id})}" method="get">
+                                <button type="submit" id="delete-inproceedings" onclick="return confirm('Are you sure?');">Delete</button>
+                            </form>
                         </li>
                     </ul>
                 </div>
@@ -133,7 +152,7 @@
 
             </div>
         </div>
-        
-         <script src="/assets/references.js"></script>
+
+        <script src="/assets/references.js"></script>
     </body>
 </html>

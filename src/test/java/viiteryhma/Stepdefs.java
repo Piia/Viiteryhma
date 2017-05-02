@@ -7,6 +7,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import java.io.File;
 import static org.junit.Assert.*;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -26,8 +27,8 @@ public class Stepdefs {
         File file;
         if (System.getProperty("os.name").matches("Mac OS X")) {
             file = new File("lib/macgeckodriver");
-        } else if (System.getProperty("os.name").matches("Windows 10")) {
-            file = new File("lib/geckodriver.exe");
+        } else if (System.getProperty("os.name").toLowerCase().contains("windows")) {
+            file = new File("lib/geckodriver.exe");   
         } else {
             file = new File("lib/geckodriver");
         }
@@ -42,6 +43,11 @@ public class Stepdefs {
     @After
     public void tearDown() {
         driver.quit();
+    }
+    
+    @Given("^database is cleared$")
+    public void clear_database() {
+        driver.get(baseUrl + "/delete/all");
     }
 
     @Given("^add reference of type \"([^\"]*)\" is selected$")
@@ -113,11 +119,21 @@ public class Stepdefs {
     public void reference_form_is_submitted(String referenceType) throws Throwable {
         submitReferenceForm(referenceType);
     }
+    
+    @When("^delete button for reference of type \"([^\"]*)\" is clicked$")
+    public void delete_button_clicked(String referenceType) throws Throwable {
+        WebElement element = driver.findElement(By.id("delete-" + referenceType));
+        element.click();
+        
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+        try{ Thread.sleep(3000); } catch(Exception e){}
+    }
 
     @Then("^reference is added$")
     public void reference_is_added() throws Throwable {
-        try{ Thread.sleep(30000); } catch(Exception e){}
-        assertTrue(driver.getPageSource().contains("Reference added successfully!"));
+        try{ Thread.sleep(3000); } catch(Exception e){}
+        assertTrue(driver.getPageSource().contains("added"));
     }
 
     @Then("^reference is not added$")

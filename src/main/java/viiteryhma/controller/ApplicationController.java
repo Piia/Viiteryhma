@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import viiteryhma.model.Article;
@@ -51,14 +52,6 @@ public class ApplicationController {
         return "new";
     }
     
-    
-//    Tätä ei tarvita?
-//    @GetMapping("/articles")
-//    public String getAllArticles(Model model) {
-//        model.addAttribute("articles", articleRepo.findAll());
-//        return "articles";
-//    }
-    
     @GetMapping("/references")
     public String getAllReferences(Model model) {
         model.addAttribute("articles", articleRepo.findAll());
@@ -95,6 +88,33 @@ public class ApplicationController {
         return "new";
     }
     
+    @GetMapping("/delete/article/{id}")
+    public String deleteArticle(Model model, @PathVariable String id) {
+        articleRepo.delete(Integer.parseInt(id));        
+        return "redirect:/references";
+    }
+    
+    @GetMapping("/delete/book/{id}")
+    public String deleteBook(Model model, @PathVariable String id) {
+        bookRepo.delete(Integer.parseInt(id));        
+        return "redirect:/references";
+    }
+    
+    @GetMapping("/delete/inproceedings/{id}")
+    public String deleteInproceedings(Model model, @PathVariable String id) {
+        inproceedingsRepo.delete(Integer.parseInt(id));        
+        return "redirect:/references";
+    }
+    
+    @GetMapping("/delete/all")
+    public String deleteAll(Model model) {
+        articleRepo.deleteAll();
+        bookRepo.deleteAll();
+        inproceedingsRepo.deleteAll();
+        
+        return "redirect:/references";
+    }
+    
     @GetMapping("/export")
     public String getExportReferences(Model model) {
         return "export";
@@ -123,7 +143,7 @@ public class ApplicationController {
             Tämä nyt tämmöinen hieno production ready!
         */
 
-        List<Reference> references = new ArrayList<Reference>();
+        List<Reference> references = new ArrayList<>();
         references.addAll(articleRepo.findAll());
         references.addAll(bookRepo.findAll());
         references.addAll(inproceedingsRepo.findAll());
@@ -134,7 +154,7 @@ public class ApplicationController {
             refWriter.HederAndItsType(fields.get("key"), ref.getType());
 
             fields.keySet().stream().forEach((name) -> {
-                if (!name.equals("key")) {
+                if (!name.equals("key") && fields.get(name) != null) {
                   refWriter.OneFieldAndItsType(fields.get(name), name);
                 }
             });
