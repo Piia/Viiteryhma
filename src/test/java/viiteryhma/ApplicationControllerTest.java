@@ -1,5 +1,7 @@
 package viiteryhma;
 
+
+
 import org.hamcrest.Matchers;
 import static org.hamcrest.Matchers.containsString;
 import org.junit.Before;
@@ -29,20 +31,19 @@ import viiteryhma.repositories.InproceedingsRepository;
 @SpringBootTest
 @AutoConfigureMockMvc
 public class ApplicationControllerTest {
-
     @Autowired
     private MockMvc mockMvc;
-
+    
     @Autowired
     private ArticleRepository articleRepo;
     @Autowired
     private BookRepository bookRepo;
     @Autowired
     private InproceedingsRepository inproceedingsRepo;
-
+    
     public ApplicationControllerTest() {
     }
-
+    
     @Before
     public void setUp() {
         articleRepo.deleteAll();
@@ -58,10 +59,10 @@ public class ApplicationControllerTest {
         article.setYear("2017");
         article.setVolume("1");
         article.setKey("aaa");
-
+        
         return article;
     }
-
+    
     protected Book getMockBook() {
         Book book = new Book();
         book.setAuthor("Pekka");
@@ -69,10 +70,10 @@ public class ApplicationControllerTest {
         book.setPublisher("Julkaisija");
         book.setYear("2017");
         book.setKey("aaa");
-
+        
         return book;
     }
-
+    
     protected Inproceedings getMockInproceedings() {
         Inproceedings inproceedings = new Inproceedings();
         inproceedings.setAuthor("Pekka");
@@ -80,10 +81,10 @@ public class ApplicationControllerTest {
         inproceedings.setBooktitle("Kirjan otsikko");
         inproceedings.setYear("2017");
         inproceedings.setKey("aaa");
-
+        
         return inproceedings;
     }
-
+    
     @Test
     public void testIndexPageRedirect() throws Exception {
         this.mockMvc
@@ -101,11 +102,11 @@ public class ApplicationControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("<h2>Add a reference</h2>")));
     }
-
+    
     @Test
     public void testListReferencesHasArticleWHenArticleAddedToDb() throws Exception {
         articleRepo.save(getMockArticle());
-
+        
         this.mockMvc
                 .perform(get("/references"))
                 .andDo(print())
@@ -113,13 +114,13 @@ public class ApplicationControllerTest {
                 .andExpect(content().string(containsString("<h3>Articles</h3>")))
                 .andExpect(content().string(containsString("<li>Author: Pekka</li>")));
     }
-
+    
     @Test
     public void testListReferencesShowsReferencesWhenMultipleAddedToTheDb() throws Exception {
         articleRepo.save(getMockArticle());
         bookRepo.save(getMockBook());
         inproceedingsRepo.save(getMockInproceedings());
-
+        
         this.mockMvc
                 .perform(get("/references"))
                 .andDo(print())
@@ -133,32 +134,32 @@ public class ApplicationControllerTest {
     }
 
     @Test
-    public void testAddANewArticleReference() throws Exception {
+    public void testAddANewArticleReference() throws Exception {              
         this.mockMvc
                 .perform(post("/new/article", this.getMockArticle()))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(model().attribute("success", true));
+                .andExpect(model().attribute("success", true));        
     }
-
+    
     @Test
-    public void testAddANewBookReference() throws Exception {
+    public void testAddANewBookReference() throws Exception {              
         this.mockMvc
                 .perform(post("/new/book", this.getMockBook()))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(model().attribute("success", true));
+                .andExpect(model().attribute("success", true));        
     }
-
+    
     @Test
-    public void testAddANewInproceedingsReference() throws Exception {
+    public void testAddANewInproceedingsReference() throws Exception {             
         this.mockMvc
                 .perform(post("/new/inproceedings", getMockInproceedings()))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(model().attribute("success", true));
+                .andExpect(model().attribute("success", true));        
     }
-
+    
     @Test
     public void testReturnPageExport() throws Exception {
         this.mockMvc
@@ -167,7 +168,7 @@ public class ApplicationControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("<h2>Export references</h2>")));
     }
-
+    
     @Test
     public void testGeneratedBibTexIsEmptyWhenNoReferences() throws Exception {
         this.mockMvc
@@ -175,14 +176,14 @@ public class ApplicationControllerTest {
                 .andDo(print())
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/files/references.bib"));
-
+        
         this.mockMvc
                 .perform(get("/files/references.bib"))
                 .andDo(print())
                 .andExpect(status().isOk())
                 .andExpect(content().string(""));
     }
-
+    
     @Test
     public void testGeneratedBibTexHasGivenName() throws Exception {
         this.mockMvc
@@ -191,7 +192,7 @@ public class ApplicationControllerTest {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/files/cool_references.bib"));
     }
-
+    
     @Test
     public void testGeneratedBibTexHasOneReferenceWhenOneAddedToDb() throws Exception {
         articleRepo.save(getMockArticle());
@@ -208,7 +209,7 @@ public class ApplicationControllerTest {
         articleRepo.save(getMockArticle());
         bookRepo.save(getMockBook());
         inproceedingsRepo.save(getMockInproceedings());
-
+        
         this.mockMvc
                 .perform(get("/files/references.bib"))
                 .andDo(print())

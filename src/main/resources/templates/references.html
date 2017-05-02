@@ -46,9 +46,11 @@
                             </ul>
                         </li>
                         <li>
-                            <form th:action="@{/delete/article/{id}(id=*{id})}" method="get">
-                                <button type="submit" id="delete-article" onclick="return confirm('Are you sure?');">Delete</button>
-                            </form>
+                            <div align="right">
+                                <form th:action="@{/delete/article/{id}(id=*{id})}" method="get">
+                                    <button type="submit" class="delete" id="delete-article" onclick="return confirm('Are you sure?');">Delete</button>
+                                </form>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -77,9 +79,11 @@
                             </ul>
                         </li>
                         <li>
-                            <form th:action="@{/delete/book/{id}(id=*{id})}" method="get">
-                                <button type="submit" id="delete-book" onclick="return confirm('Are you sure?');">Delete</button>
-                            </form>
+                            <div align="right">
+                                <form th:action="@{/delete/book/{id}(id=*{id})}" method="get">
+                                    <button type="submit" class="delete" id="delete-book" onclick="return confirm('Are you sure?');">Delete</button>
+                                </form>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -110,9 +114,11 @@
                             </ul>
                         </li>
                         <li>
-                            <form th:action="@{/delete/inproceedings/{id}(id=*{id})}" method="get">
-                                <button type="submit" id="delete-inproceedings" onclick="return confirm('Are you sure?');">Delete</button>
-                            </form>
+                            <div align="right">
+                                <form th:action="@{/delete/inproceedings/{id}(id=*{id})}" method="get">
+                                    <button type="submit" class="delete" id="delete-inproceedings" onclick="return confirm('Are you sure?');">Delete</button>
+                                </form>
+                            </div>
                         </li>
                     </ul>
                 </div>
