@@ -51,7 +51,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-data-jpa:1.5.2.RELEASE')
     compile('com.h2database:h2:1.4.194')
     compile("com.heroku.sdk:heroku-jdbc:0.1.1")
-    compile group: 'org.postgresql', name: 'postgresql', version: '42.0.0'
+    //compile group: 'org.postgresql', name: 'postgresql', version: '42.0.0'
+    compile("org.postgresql:postgresql:9.4.1212.jre7")
     compile group: 'org.springframework', name: 'spring-jdbc', version: '4.3.8.RELEASE'
 
     //compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version:seleniumVersion
